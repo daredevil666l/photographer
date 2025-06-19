@@ -247,7 +247,7 @@ body.menu-open .menu li:nth-child(5) {
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 1);
 }
 
 .hero-caption span {
@@ -911,4 +911,176 @@ body.menu-open .menu li:nth-child(5) {
 
 .to-top:hover::before {
   transform: rotate(-45deg) translateY(-2px);
+}
+
+/* ------------------------------------------------------------------ */
+/*  ≤ 640 px:   самый простой стек элементов, как на скрин-шоте       */
+/* ------------------------------------------------------------------ */
+@media (max-width: 640px) {
+  /* убираем левый фикс-бар и лишние «ступеньки» */
+  .about {
+    margin-left: 0; /* весь экран телефона */
+    padding: 12vw 5vw;
+  }
+
+  /* блоки идут строго друг за другом */
+  .about__grid {
+    display: block;
+  }
+
+  /* заголовок */
+  .about-head {
+    margin-bottom: 9vw;
+  }
+
+  /* две фотографии вертикальной колонкой */
+  .about-photos {
+    display: block; /* ломаем grid          */
+    margin: 0 0 9vw; /* отступ сверху/снизу  */
+  }
+
+  .about-photos .photo {
+    width: 100%;
+    height: auto; /* высота зависит от снимка */
+    aspect-ratio: auto; /* снимаем фикс. соотношение */
+    margin: 0 0 9vw; /* расстояние между кадрами  */
+  }
+
+  .about-photos .photo img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* текст + кнопка */
+  .about__text {
+    max-width: none;
+    font-size: 16px;
+    margin-bottom: 10vw;
+  }
+
+  .about__btn {
+    width: 100%; /* удобно нажимать пальцем */
+  }
+}
+
+/* переменная высоты верхней полосы */
+:root {
+  --topbar-h: 56px;
+}
+
+/* ------------------- ≤ 899 px  : sidebar → top-bar ------------------ */
+@media (max-width: 899px) {
+  /* 1. Полоса вместо левой колонки */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--topbar-h);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    z-index: 1200;
+  }
+
+  /* 2. Бургер */
+  #burger {
+    margin: 0; /* убираем прежний отступ */
+  }
+
+  /* 3. Имя теперь читается горизонтально */
+  .name {
+    writing-mode: horizontal-tb;
+    transform: none;
+    letter-spacing: 2px;
+    font-size: 14px;
+    margin: 0 auto;
+  }
+
+  /* 4. Сдвигаем само выезжающее меню и overlay ниже топ-бара */
+  body.menu-open .menu,
+  .menu {
+    top: var(--topbar-h);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--topbar-h));
+  }
+  #overlay {
+    top: var(--topbar-h);
+  }
+
+  /* 5. У контента убираем левый «коридор» и добавляем запас сверху */
+  .about,
+  .hero,
+  .sale,
+  .contacts,
+  .site-footer {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 6vw);
+  }
+}
+
+/* ================= mobile ≤ 899 px  —  top-bar вместо бокового меню */
+@media (max-width:899px){
+
+  /* сама полоса */
+  .sidebar{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:56px;
+    display:flex;
+    align-items:center;
+    /* учитываем вырезы слева/справа */
+    padding:0 calc(16px + env(safe-area-inset-right))
+             0 calc(16px + env(safe-area-inset-left));
+    background:#fff;
+    border-bottom:1px solid #ddd;
+    z-index:1200;
+  }
+
+  /* бургер — всегда поверх overlay */
+  #burger{
+    width:32px; height:24px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    background:none; border:none; cursor:pointer;
+    position:relative;
+    z-index:1300;
+  }
+
+  /* полоски бургера */
+  #burger span{
+    width:100%;
+    height:3px;                     /* чуть толще — хорошо видно */
+    background:#000;
+    border-radius:2px;
+    transition:.4s;
+  }
+
+  /* фамилия в центре */
+  .name{
+    margin:0 auto;
+    writing-mode:horizontal-tb;
+    letter-spacing:2px;
+    font-size:14px;
+  }
+
+  /* сдвигаем выезжающее меню и overlay под полоску */
+  .menu,
+  body.menu-open .menu{top:56px;height:calc(100vh - 56px)}
+  #overlay{top:56px}
+}
+
+/* бургер «крестиком» при открытом меню (прежние правила) */
+body.menu-open #burger span:nth-child(1){
+  transform:translateY(10px) rotate(45deg)
+}
+body.menu-open #burger span:nth-child(2){opacity:0}
+body.menu-open #burger span:nth-child(3){
+  transform:translateY(-10px) rotate(-45deg)
 }
