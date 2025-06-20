@@ -73,3 +73,39 @@ const slider = new Swiper('.sale__slider', {
 });
 
 
+
+function setMasonryHeights() {
+  const items = document.querySelectorAll('.portfolio-item');
+  
+  items.forEach(item => {
+    const img = item.querySelector('img');
+    if (img && img.complete) {
+      const ratio = img.naturalHeight / img.naturalWidth;
+      const rowSpan = Math.ceil(ratio * 12); /* было 15 - уменьшили */
+      item.style.setProperty('--row-span', rowSpan);
+    } else if (img) {
+      img.addEventListener('load', () => {
+        const ratio = img.naturalHeight / img.naturalWidth;
+        const rowSpan = Math.ceil(ratio * 12); /* было 15 */
+        item.style.setProperty('--row-span', rowSpan);
+      });
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', setMasonryHeights);
+
+/* принудительное обновление masonry при ресайзе */
+window.addEventListener('resize', () => {
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  portfolioItems.forEach(item => {
+    const img = item.querySelector('img');
+    if (img) {
+      // пересчитываем высоту для нового размера экрана
+      const ratio = img.naturalHeight / img.naturalWidth;
+      const isMobile = window.innerWidth <= 600;
+      const coefficient = isMobile ? 8 : 12;
+      const rowSpan = Math.ceil(ratio * coefficient);
+      item.style.setProperty('--row-span', rowSpan);
+    }
+  });
+});

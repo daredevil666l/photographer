@@ -2,11 +2,23 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <title>Меню фотографа</title>
+    <title>Портфолио</title>
+
+    <!-- meta, шрифты и global CSS уже подключены на сайте -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
   </head>
   <body>
-    <!-- Узкая колонка с бургером и вертикальным именем -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- уже существующий бок-/топ-бар с бургером -->
     <aside class="sidebar">
       <button id="burger" aria-label="Открыть меню">
         <span></span><span></span><span></span>
@@ -14,23 +26,44 @@
       <div class="name">EKATERINA<br />AVRAMENKO</div>
     </aside>
 
-    <!-- Полупрозрачный слой для клика вне меню -->
     <div id="overlay"></div>
 
-    <!-- Сама панель навигации -->
+    <!-- прежнее выпадающее меню — активный пункт подсветится скриптом -->
     <nav class="menu">
       <ul>
         <li><a href="index.html">Главная</a></li>
         <li><a href="portfolio.html">Портфолио</a></li>
-        <li><a href="about.html">Обо&nbsp;мне</a></li>
-        <li><a href="booking.html">Онлайн&nbsp;запись</a></li>
+        <li><a href="about.html">Обо мне</a></li>
+        <li><a href="booking.html">Онлайн запись</a></li>
         <li><a href="contacts.html">Контакты</a></li>
       </ul>
     </nav>
 
+    <!-- ====== БЛОК PORTFOLIO ============================================ -->
+    <main class="portfolio">
+      <h1 class="portfolio-head">ПОРТФОЛИО</h1>
 
+      <!-- контейнер-«водопад» -->
+      <div id="gallery" class="gallery"></div>
 
-    
+      <!-- индикатор подгрузки -->
+      <div id="loader" class="loader" aria-hidden="true"></div>
+    </main>
+
+    <!-- ↓↓↓  ПОДВАЛ  ↓↓↓ -->
+    <footer class="site-footer">
+      <p class="footer-line">ИП Авраменко Екатерина Валерьевна</p>
+
+      <p class="footer-line">
+        ИНН: 7727031117419&nbsp;&nbsp;|&nbsp;&nbsp;ОГРНИП: 324774600659072
+      </p>
+
+      <!-- кнопка «наверх» -->
+      <!-- <button id="toTop" class="to-top" aria-label="Наверх"></button> -->
+    </footer>
+
     <script src="main.js"></script>
+    <!-- бургер / overlay -->
+    <script src="portfolio.js" defer></script>
   </body>
 </html>

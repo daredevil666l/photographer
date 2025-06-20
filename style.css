@@ -1026,61 +1026,810 @@ body.menu-open .menu li:nth-child(5) {
 }
 
 /* ================= mobile ≤ 899 px  —  top-bar вместо бокового меню */
-@media (max-width:899px){
-
+@media (max-width: 899px) {
   /* сама полоса */
-  .sidebar{
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    height:56px;
-    display:flex;
-    align-items:center;
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
     /* учитываем вырезы слева/справа */
-    padding:0 calc(16px + env(safe-area-inset-right))
-             0 calc(16px + env(safe-area-inset-left));
-    background:#fff;
-    border-bottom:1px solid #ddd;
-    z-index:1200;
+    padding: 0 calc(16px + env(safe-area-inset-right)) 0
+      calc(16px + env(safe-area-inset-left));
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1200;
   }
 
   /* бургер — всегда поверх overlay */
-  #burger{
-    width:32px; height:24px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    background:none; border:none; cursor:pointer;
-    position:relative;
-    z-index:1300;
+  #burger {
+    width: 32px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1300;
   }
 
   /* полоски бургера */
-  #burger span{
-    width:100%;
-    height:3px;                     /* чуть толще — хорошо видно */
-    background:#000;
-    border-radius:2px;
-    transition:.4s;
+  #burger span {
+    width: 100%;
+    height: 3px; /* чуть толще — хорошо видно */
+    background: #000;
+    border-radius: 2px;
+    transition: 0.4s;
   }
 
   /* фамилия в центре */
-  .name{
-    margin:0 auto;
-    writing-mode:horizontal-tb;
-    letter-spacing:2px;
-    font-size:14px;
+  .name {
+    margin: 0 auto;
+    writing-mode: horizontal-tb;
+    letter-spacing: 2px;
+    font-size: 14px;
   }
 
   /* сдвигаем выезжающее меню и overlay под полоску */
   .menu,
-  body.menu-open .menu{top:56px;height:calc(100vh - 56px)}
-  #overlay{top:56px}
+  body.menu-open .menu {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+  #overlay {
+    top: 56px;
+  }
 }
 
 /* бургер «крестиком» при открытом меню (прежние правила) */
-body.menu-open #burger span:nth-child(1){
-  transform:translateY(10px) rotate(45deg)
+body.menu-open #burger span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
 }
-body.menu-open #burger span:nth-child(2){opacity:0}
-body.menu-open #burger span:nth-child(3){
-  transform:translateY(-10px) rotate(-45deg)
+body.menu-open #burger span:nth-child(2) {
+  opacity: 0;
+}
+body.menu-open #burger span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* общий заголовок */
+.page-head {
+  text-align: center;
+  font: clamp(28px, 6vw, 64px) / 1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  margin: 8vh 0 6vh;
+}
+
+/* Masonry-раскладка без JS: CSS columns */
+.masonry {
+  column-width: 240px; /* «целевая» ширина колонки */
+  column-gap: 16px;
+  padding: 0 12px;
+}
+
+/* карточка */
+.card {
+  position: relative;
+  margin: 0 0 16px;
+  overflow: hidden;
+  border-radius: 4px;
+  break-inside: avoid; /* не рвать в колонках */
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* overlay + подпись */
+.card::before,
+.card figcaption {
+  position: absolute;
+  inset: 0;
+  transition: 0.4s;
+}
+
+.card::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+}
+
+figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font: 14px "Geometria", sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* hover-эффект */
+.card:hover img {
+  transform: scale(1.05);
+}
+.card:hover::before {
+  opacity: 1;
+}
+.card:hover figcaption {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 600px) {
+  .masonry {
+    column-width: 160px;
+  }
+}
+
+/* ---------- Секция портфолио --------------------------------------- */
+.portfolio {
+  margin-left: var(--sidebar-w); /* тот же «коридор» */
+  padding: 10vw clamp(12px, 4vw, 48px); /* как у остальных блоков */
+  background: #fff;
+}
+
+/* для мобильного top-bar */
+@media (max-width: 899px) {
+  .portfolio {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+}
+
+/* Заголовок секции – переиспользуем section-head */
+.section-head {
+  text-align: center;
+  margin-bottom: 8vw;
+}
+.section-head h1 {
+  font: clamp(28px, 6vw, 64px) / 1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+/* ---------- Masonry ------------------------------------------------- */
+.masonry {
+  column-width: 260px; /* «целевой» размер колонки */
+  column-gap: 16px;
+  padding: 0 4px; /* тот же внутренний отступ, что у галерей */
+}
+
+/* карточка */
+.card {
+  position: relative;
+  margin: 0 0 16px;
+  overflow: hidden;
+  border-radius: 4px;
+  break-inside: avoid;
+  cursor: pointer;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* затемнение + подпись */
+.card::before,
+.card figcaption {
+  position: absolute;
+  inset: 0;
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+}
+figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 14px "Geometria", sans-serif;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* hover */
+.card:hover img {
+  transform: scale(1.05);
+}
+.card:hover::before {
+  opacity: 1;
+}
+.card:hover figcaption {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Адаптив masonry ---------------------------------------- */
+@media (max-width: 600px) {
+  .masonry {
+    column-width: 160px;
+  }
+}
+
+/* -------------------- PORTFOLIO ----------------------------------- */
+.portfolio {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 5vw;
+  min-height: 100vh;
+}
+
+/* заголовок по центру */
+.portfolio-head {
+  text-align: center;
+  font: clamp(28px, 5.2vw, 68px) / 1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  margin-bottom: 6vw;
+}
+
+/* «водопад» — CSS Columns */
+.gallery {
+  column-count: 3;
+  column-gap: 18px;
+}
+
+@media (max-width: 1024px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+@media (max-width: 600px) {
+  .gallery {
+    column-count: 1;
+  }
+}
+
+/* каждая карточка */
+.gallery-item {
+  position: relative;
+  display: block;
+  margin: 0 0 18px;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* ----- hover: затемнение + лёгкий zoom ---------------------------- */
+.gallery-item::after {
+  /* полупрозрачная вуаль */
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  opacity: 0;
+  transform: scale(1.05); /* начинаем чуть больше, чтобы совпало с zoom */
+  transition: opacity 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+} /* zoom-in эфф. */ /*[8]*/
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* индикатор загрузки (простой спиннер) */
+.loader {
+  width: 38px;
+  height: 38px;
+  margin: 40px auto;
+  border: 4px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* показываем спиннер, когда JS добавит класс */
+.loader.active {
+  display: block;
+}
+
+/* на узких экранах убираем левый коридор под sidebar-бар */
+@media (max-width: 899px) {
+  .portfolio {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 6vw);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Подпись при hover: по центру и чуть крупнее                       */
+/* ------------------------------------------------------------------ */
+.gallery-item::after {
+  /* прежние свойства оставляем, меняем только положение и размер */
+  display: flex; /* даёт возможность центрировать flex-ом */
+  align-items: center; /* по вертикали */
+  justify-content: center; /* по горизонтали */
+  text-align: center;
+
+  font-size: clamp(18px, 2.4vw, 26px); /* стало заметно крупнее */
+  line-height: 1.2;
+  letter-spacing: 1.5px;
+  padding: 0 12px; /* небольшой внутренний отступ */
+
+  /* остальные свойства (background, opacity, transform, transition)
+     берутся из ранее заданных правил и трогать их не нужно */
+}
+
+
+/* ===================== PORTFOLIO PREVIEW ========================== */
+.portfolio-preview {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw 10vw;
+  background: #fff;
+}
+
+.portfolio-preview__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* заголовок */
+.portfolio-preview__title {
+  font: clamp(28px, 4.6vw, 48px)/1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  text-align: center;
+  margin-bottom: 6vw;
+  color: #000;
+}
+
+/* обёртка с относительным позиционированием для fade */
+.portfolio-preview__wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5vw;
+}
+
+/* masonry-сетка на CSS Grid */
+.portfolio-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: 20px;          /* маленькие строки для плотной упаковки */
+  gap: 16px;
+  padding: 0 0 4vw 0;
+}
+
+/* карточка фотографии */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  /* автоматически займёт нужное количество строк */
+  grid-row-end: span var(--row-span);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* overlay с информацией */
+.portfolio-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.35s ease;
+  padding: 16px;
+}
+
+.portfolio-item__title {
+  margin: 0 0 8px 0;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.portfolio-item__category {
+  font-size: clamp(12px, 1.4vw, 14px);
+  letter-spacing: 1px;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+/* hover эффект */
+.portfolio-item:hover img {
+  transform: scale(1.08);
+}
+
+.portfolio-item:hover .portfolio-item__overlay {
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 1;
+}
+
+/* fade-градиент внизу */
+.portfolio-preview__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, #fff 0%, rgba(255, 255, 255, 0.95) 40%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* кнопка */
+.portfolio-preview__button {
+  display: block;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Geometria", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.portfolio-preview__button span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-preview__button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+  transform: scale(0.85);
+  opacity: 0;
+  border-radius: 4px;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.portfolio-preview__button:hover {
+  color: #222;
+  background: #fff;
+}
+
+.portfolio-preview__button:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.portfolio-preview__button:hover span {
+  transform: translateX(8px);
+}
+
+/* адаптивность */
+@media (max-width: 1200px) {
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 899px) {
+  .portfolio-preview {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+  
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* masonry-сетка на CSS Grid - более компактная версия */
+.portfolio-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* было 280px */
+  grid-auto-rows: 15px;          /* было 20px - уменьшили шаг */
+  gap: 12px;                     /* было 16px */
+  padding: 0 0 3vw 0;           /* уменьшили нижний отступ */
+}
+
+/* адаптивность - обновлённые breakpoints */
+@media (max-width: 1200px) {
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* было 240px */
+  }
+}
+
+@media (max-width: 899px) {
+  .portfolio-preview {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+  
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* было 200px */
+    gap: 10px;                   /* было 12px */
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;                    /* было 10px */
+  }
+}
+
+@media (max-width: 400px) {
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+
+/* =================== PORTFOLIO PAGE ============================== */
+.portfolio {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 5vw 6vw;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.portfolio-head {
+  text-align: center;
+  font: clamp(32px, 5.2vw, 72px)/1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  margin-bottom: 6vw;
+  color: #000;
+}
+
+/* полная галерея использует те же стили, что и превью */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-auto-rows: 15px;
+  gap: 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* карточки портфолио */
+.gallery .portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  grid-row-end: span var(--row-span);
+  transition: transform 0.3s ease;
+}
+
+.gallery .portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* overlay с информацией */
+.gallery .portfolio-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.35s ease;
+  padding: 16px;
+}
+
+.gallery .portfolio-item__title {
+  margin: 0 0 8px 0;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.gallery .portfolio-item__category {
+  font-size: clamp(12px, 1.4vw, 14px);
+  letter-spacing: 1px;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+/* hover эффект */
+.gallery .portfolio-item:hover {
+  transform: translateY(-4px);
+}
+
+.gallery .portfolio-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery .portfolio-item:hover .portfolio-item__overlay {
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 1;
+}
+
+/* лоадер */
+.loader {
+  width: 38px;
+  height: 38px;
+  margin: 40px auto;
+  border: 4px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader.active {
+  display: block;
+}
+
+/* адаптивность */
+@media (max-width: 1200px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 899px) {
+  .portfolio {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+  
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ============= ПРИНУДИТЕЛЬНАЯ МОБИЛЬНАЯ АДАПТИВНОСТЬ ============== */
+
+/* планшеты */
+@media (max-width: 1200px) {
+  .gallery,
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  }
+}
+
+/* телефоны средние */
+@media (max-width: 899px) {
+  .portfolio {
+    margin-left: 0 !important;
+    padding-top: calc(var(--topbar-h) + 8vw) !important;
+  }
+  
+  .gallery,
+  .portfolio-preview__grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 8px !important;
+  }
+}
+
+/* телефоны стандартные - СТРОГО 2 КОЛОНКИ */
+@media (max-width: 600px) {
+  .gallery,
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr 1fr !important; /* принудительно 2 колонки */
+    grid-auto-rows: 12px !important;
+    gap: 6px !important;
+  }
+  
+  /* уменьшаем коэффициент для компактности */
+  .gallery .portfolio-item,
+  .portfolio-preview__grid .portfolio-item {
+    grid-row-end: span var(--row-span) !important;
+  }
+  
+  /* компактные шрифты */
+  .gallery .portfolio-item__title,
+  .portfolio-preview__grid .portfolio-item__title {
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+  }
+  
+  .gallery .portfolio-item__category,
+  .portfolio-preview__grid .portfolio-item__category {
+    font-size: 11px !important;
+  }
+}
+
+/* очень узкие экраны - тоже 2 колонки */
+@media (max-width: 400px) {
+  .gallery,
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr 1fr !important; /* всё равно 2 колонки */
+    gap: 4px !important;
+  }
+}
+
+/* экстра-узкие экраны < 320px - только тогда 1 колонка */
+@media (max-width: 320px) {
+  .gallery,
+  .portfolio-preview__grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
 }
