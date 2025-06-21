@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{{CLIENT_NAME}} - {{SESSION_TITLE}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- упрощённая навигация для клиентской страницы -->
+  <header class="client-header">
+    <div class="client-header__container">
+      <div class="client-header__logo">
+        <span>EKATERINA AVRAMENKO</span>
+        <small>ФОТОГРАФ</small>
+      </div>
+      
+      <nav class="client-header__nav">
+        <a href="../index.html">Главная</a>
+        <a href="../portfolio.html">Портфолио</a>
+        <a href="../contacts.html">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =================== КОНТЕНТ СТРАНИЦЫ КЛИЕНТА =================== -->
+  <main class="client-page">
+    
+    <!-- информация о фотосессии -->
+    <section class="client-info">
+      <div class="client-info__container">
+        
+        <div class="client-info__content">
+          <h1 class="client-info__title">{{SESSION_TITLE}}</h1>
+          
+          <div class="client-info__meta">
+            <div class="client-info__item">
+              <span class="client-info__label">Клиент</span>
+              <span class="client-info__value">{{CLIENT_NAME}}</span>
+            </div>
+            
+            <div class="client-info__item">
+              <span class="client-info__label">Дата съёмки</span>
+              <span class="client-info__value">{{SESSION_DATE}}</span>
+            </div>
+            
+            <div class="client-info__item">
+              <span class="client-info__label">Категория</span>
+              <span class="client-info__value">{{SESSION_CATEGORY}}</span>
+            </div>
+          </div>
+          
+          {{#if SESSION_DESCRIPTION}}
+          <p class="client-info__description">{{SESSION_DESCRIPTION}}</p>
+          {{/if}}
+          
+          {{#if ENABLE_DOWNLOAD}}
+          <div class="client-info__actions">
+            <button id="downloadAll" class="client-download-btn">
+              <span>Скачать все фотографии</span>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- галерея фотографий -->
+    <section class="client-gallery">
+      <div class="client-gallery__container">
+        
+        <div class="client-gallery__grid" id="clientPhotosGrid">
+          {{#each PHOTOS}}
+          <div class="client-photo-item" data-photo="{{this.filename}}">
+            <img src="{{this.url}}" alt="{{this.filename}}" loading="lazy">
+            
+            {{#if ../ENABLE_DOWNLOAD}}
+            <div class="client-photo-overlay">
+              <button class="client-photo-download" data-url="{{this.download_url}}">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+              </button>
+            </div>
+            {{/if}}
+          </div>
+          {{/each}}
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- лайтбокс для просмотра -->
+    <div id="lightbox" class="lightbox" style="display: none;">
+      <div class="lightbox__overlay"></div>
+      <div class="lightbox__content">
+        <img id="lightboxImage" src="" alt="">
+        <button id="lightboxClose" class="lightbox__close">×</button>
+        <button id="lightboxPrev" class="lightbox__nav lightbox__nav--prev">‹</button>
+        <button id="lightboxNext" class="lightbox__nav lightbox__nav--next">›</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- подвал -->
+  <footer class="client-footer">
+    <div class="client-footer__container">
+      <p>© {{CURRENT_YEAR}} Екатерина Авраменко. Все права защищены.</p>
+      <p>Фотографии предназначены исключительно для личного использования.</p>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../client-page.js"></script>
+</body>
+</html>

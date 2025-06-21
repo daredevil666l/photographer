@@ -3527,3 +3527,558 @@ figcaption {
     max-width: none;
   }
 }
+
+/* ==================== CLIENT ADMIN PAGE ========================== */
+.client-admin {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+
+.client-admin__container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.client-admin__title {
+  font: clamp(28px, 4.6vw, 48px) / 1 "Geometria", sans-serif;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 6vw;
+  color: #000;
+}
+
+/* форма создания */
+.client-form {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.client-form__section {
+  padding: 3rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.client-form__section:last-child {
+  border-bottom: none;
+}
+
+.client-form__section-title {
+  font: clamp(18px, 2.4vw, 24px) / 1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.client-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.client-form__field {
+  margin-bottom: 1.5rem;
+}
+
+.client-form__field label {
+  display: block;
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.client-form__field input,
+.client-form__field select,
+.client-form__field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.client-form__field input:focus,
+.client-form__field select:focus,
+.client-form__field textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* URL поле */
+.url-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.url-prefix {
+  background: #f5f5f5;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #666;
+  border-right: 1px solid #ddd;
+}
+
+.url-field input {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* чекбокс */
+.client-form__checkbox {
+  margin: 1.5rem 0;
+}
+
+.client-form__checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font: 14px/1 "Geometria", sans-serif;
+}
+
+.client-form__checkbox input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+/* зона загрузки */
+.client-upload-zone {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.client-upload-zone:hover,
+.client-upload-zone.dragover {
+  border-color: #000;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.client-upload-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  color: #666;
+}
+
+.client-upload-content p {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.client-upload-content span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* превью файлов */
+.client-file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.client-preview-item {
+  position: relative;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.client-preview-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.client-preview-info {
+  padding: 1rem;
+  font-size: 12px;
+  color: #666;
+}
+
+.client-remove-preview {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* кнопки действий */
+.client-form__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 3rem;
+  background: #f9f9f9;
+}
+
+.client-form__btn-primary,
+.client-form__btn-secondary {
+  padding: 14px 32px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.client-form__btn-primary {
+  background: #000;
+  color: #fff;
+}
+
+.client-form__btn-primary:hover {
+  background: #fff;
+  color: #000;
+}
+
+.client-form__btn-secondary {
+  background: #fff;
+  color: #000;
+}
+
+.client-form__btn-secondary:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ==================== CLIENT PAGE TEMPLATE ======================= */
+.client-header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.client-header__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.client-header__logo span {
+  font: 16px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  color: #000;
+}
+
+.client-header__logo small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.client-header__nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.client-header__nav a {
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #666;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.client-header__nav a:hover {
+  color: #000;
+}
+
+/* информация о сессии */
+.client-info {
+  background: #f8f8f8;
+  padding: 6vw 0;
+}
+
+.client-info__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+.client-info__title {
+  font: clamp(24px, 4vw, 48px) / 1.2 "Geometria", sans-serif;
+  letter-spacing: 3px;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.client-info__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.client-info__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.client-info__label {
+  font: 11px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.client-info__value {
+  font: 16px/1 "Geometria", sans-serif;
+  color: #000;
+}
+
+.client-info__description {
+  font: 15px/1.6 "Geometria", sans-serif;
+  color: #444;
+  margin-bottom: 2rem;
+  max-width: 60ch;
+}
+
+.client-download-btn {
+  padding: 14px 28px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.client-download-btn:hover {
+  background: #333;
+}
+
+/* галерея клиента */
+.client-gallery {
+  padding: 4vw 0;
+}
+
+.client-gallery__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+.client-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.client-photo-item {
+  position: relative;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.client-photo-item:hover {
+  transform: scale(1.02);
+}
+
+.client-photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.client-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.client-photo-item:hover .client-photo-overlay {
+  opacity: 1;
+}
+
+.client-photo-download {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #000;
+  transition: background 0.3s ease;
+}
+
+.client-photo-download:hover {
+  background: #fff;
+}
+
+.client-photo-download svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* лайтбокс */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox__content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox__content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 48px;
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background 0.3s ease;
+}
+
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox__nav--prev {
+  left: -80px;
+}
+
+.lightbox__nav--next {
+  right: -80px;
+}
+
+/* подвал клиентской страницы */
+.client-footer {
+  background: #f8f8f8;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.client-footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+.client-footer p {
+  font: 12px/1.5 "Geometria", sans-serif;
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+/* мобильная адаптивность */
+@media (max-width: 899px) {
+  .client-admin {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+
+  .client-form__section {
+    padding: 2rem 1.5rem;
+  }
+
+  .client-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .client-form__actions {
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+  }
+
+  .client-gallery__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .client-info__meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .client-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lightbox__nav--prev {
+    left: 10px;
+  }
+
+  .lightbox__nav--next {
+    right: 10px;
+  }
+}
