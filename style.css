@@ -3269,3 +3269,261 @@ figcaption {
     flex-direction: column;
   }
 }
+/* ==================== CONTACTS PAGE =============================== */
+.contacts-page {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.contacts-page__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.contacts-page__title {
+  text-align: center;
+  font: clamp(32px, 5.2vw, 72px) / 1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  margin-bottom: 8vw;
+  color: #000;
+}
+
+.contacts-page__content {
+  /* контейнер для будущих блоков контента */
+  /* стили будут добавлены при создании блоков */
+}
+
+/* мобильная адаптивность */
+@media (max-width: 899px) {
+  .contacts-page {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .contacts-page {
+    padding-top: calc(var(--topbar-h) + 12vw);
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+
+  .contacts-page__title {
+    margin-bottom: 12vw;
+  }
+}
+
+/* ==================== CONTACTS MAIN BLOCK ======================== */
+.contacts-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contacts-main__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 120px);
+  align-items: start;
+}
+
+/* ========== ЛЕВАЯ КОЛОНКА ========================================== */
+.contacts-main__info {
+  padding-right: 2vw;
+}
+
+.contacts-main__intro {
+  font: clamp(14px, 1.2vw, 17px) / 1.7 "Geometria", sans-serif;
+  color: #444;
+  margin-bottom: 3rem;
+}
+
+.contacts-main__item {
+  margin-bottom: 2.5rem;
+}
+
+.contacts-main__label {
+  display: block;
+  font: 11px/1 "Geometria", sans-serif;
+  letter-spacing: 3px;
+  color: #666;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.contacts-main__email {
+  font: clamp(24px, 3.2vw, 36px) / 1.2 "Geometria", sans-serif;
+  color: #000;
+  text-decoration: none;
+  font-weight: 300;
+  word-break: break-all;
+  transition: color 0.3s ease;
+}
+
+.contacts-main__email:hover {
+  color: #666;
+}
+
+.contacts-main__social {
+  display: flex;
+  gap: 24px;
+}
+
+.social-link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  color: #000;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
+
+.social-link svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========== ПРАВАЯ КОЛОНКА (ФОРМА) ================================= */
+.contacts-main__form {
+  padding-left: 2vw;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  font: 12px/1 "Geometria", sans-serif;
+  color: #333;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0 0 8px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+  font: 14px/1.4 "Geometria", sans-serif;
+  color: #333;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-bottom-color: #000;
+}
+
+.form-field--textarea {
+  margin-bottom: 2rem;
+}
+
+.form-field--textarea textarea {
+  padding-top: 8px;
+  min-height: 120px;
+}
+
+/* кнопка отправки */
+.contacts-main__btn {
+  padding: 18px 48px;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.contacts-main__btn span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contacts-main__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.contacts-main__btn:hover {
+  color: #222;
+  background: #fff;
+}
+
+.contacts-main__btn:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.contacts-main__btn:hover span {
+  transform: translateX(8px);
+}
+
+.contacts-main__note {
+  font: 11px/1.5 "Geometria", sans-serif;
+  color: #666;
+  max-width: 42ch;
+  margin: 0;
+}
+
+/* ========== АДАПТИВНОСТЬ =========================================== */
+@media (max-width: 768px) {
+  .contacts-main__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contacts-main__info,
+  .contacts-main__form {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .contacts-main__email {
+    font-size: clamp(20px, 5vw, 28px);
+  }
+
+  .contacts-main__social {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contacts-main__intro {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .contacts-main__btn {
+    width: 100%;
+    padding: 20px 48px;
+  }
+
+  .contacts-main__note {
+    font-size: 12px;
+    max-width: none;
+  }
+}
