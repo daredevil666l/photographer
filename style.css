@@ -1386,7 +1386,6 @@ figcaption {
      берутся из ранее заданных правил и трогать их не нужно */
 }
 
-
 /* ===================== PORTFOLIO PREVIEW ========================== */
 .portfolio-preview {
   margin-left: var(--sidebar-w);
@@ -1401,7 +1400,7 @@ figcaption {
 
 /* заголовок */
 .portfolio-preview__title {
-  font: clamp(28px, 4.6vw, 48px)/1 "Geometria", sans-serif;
+  font: clamp(28px, 4.6vw, 48px) / 1 "Geometria", sans-serif;
   letter-spacing: 6px;
   text-align: center;
   margin-bottom: 6vw;
@@ -1419,7 +1418,7 @@ figcaption {
 .portfolio-preview__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-rows: 20px;          /* маленькие строки для плотной упаковки */
+  grid-auto-rows: 20px; /* маленькие строки для плотной упаковки */
   gap: 16px;
   padding: 0 0 4vw 0;
 }
@@ -1490,7 +1489,12 @@ figcaption {
   left: 0;
   right: 0;
   height: 120px;
-  background: linear-gradient(to top, #fff 0%, rgba(255, 255, 255, 0.95) 40%, transparent 100%);
+  background: linear-gradient(
+    to top,
+    #fff 0%,
+    rgba(255, 255, 255, 0.95) 40%,
+    transparent 100%
+  );
   pointer-events: none;
   z-index: 2;
 }
@@ -1559,7 +1563,7 @@ figcaption {
     margin-left: 0;
     padding-top: calc(var(--topbar-h) + 8vw);
   }
-  
+
   .portfolio-preview__grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
@@ -1583,15 +1587,18 @@ figcaption {
 .portfolio-preview__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* было 280px */
-  grid-auto-rows: 15px;          /* было 20px - уменьшили шаг */
-  gap: 12px;                     /* было 16px */
-  padding: 0 0 3vw 0;           /* уменьшили нижний отступ */
+  grid-auto-rows: 15px; /* было 20px - уменьшили шаг */
+  gap: 12px; /* было 16px */
+  padding: 0 0 3vw 0; /* уменьшили нижний отступ */
 }
 
 /* адаптивность - обновлённые breakpoints */
 @media (max-width: 1200px) {
   .portfolio-preview__grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* было 240px */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); /* было 240px */
   }
 }
 
@@ -1600,17 +1607,20 @@ figcaption {
     margin-left: 0;
     padding-top: calc(var(--topbar-h) + 8vw);
   }
-  
+
   .portfolio-preview__grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* было 200px */
-    gap: 10px;                   /* было 12px */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(180px, 1fr)
+    ); /* было 200px */
+    gap: 10px; /* было 12px */
   }
 }
 
 @media (max-width: 600px) {
   .portfolio-preview__grid {
     grid-template-columns: 1fr 1fr;
-    gap: 8px;                    /* было 10px */
+    gap: 8px; /* было 10px */
   }
 }
 
@@ -1620,7 +1630,6 @@ figcaption {
     gap: 10px;
   }
 }
-
 
 /* =================== PORTFOLIO PAGE ============================== */
 .portfolio {
@@ -1632,7 +1641,7 @@ figcaption {
 
 .portfolio-head {
   text-align: center;
-  font: clamp(32px, 5.2vw, 72px)/1 "Geometria", sans-serif;
+  font: clamp(32px, 5.2vw, 72px) / 1 "Geometria", sans-serif;
   letter-spacing: 6px;
   margin-bottom: 6vw;
   color: #000;
@@ -1724,7 +1733,9 @@ figcaption {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loader.active {
@@ -1743,7 +1754,7 @@ figcaption {
     margin-left: 0;
     padding-top: calc(var(--topbar-h) + 8vw);
   }
-  
+
   .gallery {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 10px;
@@ -1780,7 +1791,7 @@ figcaption {
     margin-left: 0 !important;
     padding-top: calc(var(--topbar-h) + 8vw) !important;
   }
-  
+
   .gallery,
   .portfolio-preview__grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
@@ -1796,20 +1807,20 @@ figcaption {
     grid-auto-rows: 12px !important;
     gap: 6px !important;
   }
-  
+
   /* уменьшаем коэффициент для компактности */
   .gallery .portfolio-item,
   .portfolio-preview__grid .portfolio-item {
     grid-row-end: span var(--row-span) !important;
   }
-  
+
   /* компактные шрифты */
   .gallery .portfolio-item__title,
   .portfolio-preview__grid .portfolio-item__title {
     font-size: 14px !important;
     line-height: 1.1 !important;
   }
-  
+
   .gallery .portfolio-item__category,
   .portfolio-preview__grid .portfolio-item__category {
     font-size: 11px !important;
@@ -1831,5 +1842,352 @@ figcaption {
   .portfolio-preview__grid {
     grid-template-columns: 1fr !important;
     gap: 8px !important;
+  }
+}
+
+/* ==================== ADMIN PAGE ================================= */
+.admin {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+
+.admin__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin__title {
+  font: clamp(28px, 4.6vw, 48px) / 1 "Geometria", sans-serif;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 6vw;
+  color: #000;
+}
+
+.admin__section-title {
+  font: clamp(20px, 2.8vw, 32px) / 1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* ========== БЛОК ЗАГРУЗКИ ======================================== */
+.admin__upload {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.upload-zone {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.upload-content {
+  pointer-events: none;
+}
+
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  color: #666;
+}
+
+.upload-content p {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.upload-content span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* превью файлов */
+.file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.preview-item {
+  position: relative;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.preview-info {
+  padding: 1rem;
+}
+
+.preview-info input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.preview-info select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.remove-preview {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ========== БЛОК УПРАВЛЕНИЯ ====================================== */
+.admin__manage {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin__filters {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin__search,
+.admin__select {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.admin__search {
+  min-width: 300px;
+}
+
+/* список фотографий */
+.photos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.photo-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.photo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.photo-info {
+  padding: 12px;
+}
+
+.photo-title {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #333;
+  line-height: 1.2;
+}
+
+.photo-category {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+/* кнопки */
+.btn-delete,
+.btn-edit {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  font-family: "Geometria", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.admin__btn {
+  padding: 14px 32px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.about-btn:hover {
+  background: #fff;
+  color: #000;
+}
+.admin__btn:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.admin__btn:not(:disabled):hover {
+  background: #333;
+}
+
+.btn-delete {
+  background: #000;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #fff;
+  color: #000;
+}
+
+.btn-edit {
+  background: #fff;
+  color: #000;
+}
+
+.btn-edit:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* статусы и уведомления */
+.loading-status {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  display: none;
+}
+
+.notifications {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.notification {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid;
+  animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+  border-left-color: #28a745;
+}
+.notification.error {
+  border-left-color: #dc3545;
+}
+.notification.info {
+  border-left-color: #17a2b8;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* мобильная адаптивность */
+@media (max-width: 899px) {
+  .admin {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+
+  .admin__upload,
+  .admin__manage {
+    padding: 2rem 1.5rem;
+  }
+
+  .admin__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .admin__search {
+    min-width: auto;
+  }
+
+  .photos-list {
+    grid-template-columns: 1fr;
   }
 }
