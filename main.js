@@ -109,3 +109,56 @@ window.addEventListener('resize', () => {
     }
   });
 });
+
+
+/* ========== ЗАГРУЗКА ОТЗЫВОВ ======================================= */
+async function loadReviews() {
+  try {
+    const response = await fetch('data/reviews.json');
+    if (!response.ok) throw new Error('Не удалось загрузить отзывы');
+    
+    const reviews = await response.json();
+    renderReviews(reviews);
+    
+  } catch (error) {
+    console.error('Ошибка загрузки отзывов:', error);
+  }
+}
+
+function renderReviews(reviews) {
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  if (!reviewsGrid) return;
+  
+  reviewsGrid.innerHTML = '';
+  
+  reviews.forEach(review => {
+    const reviewItem = document.createElement('div');
+    reviewItem.className = 'review-item';
+    
+    reviewItem.innerHTML = `
+      <div class="review-item__author">${review.author}</div>
+      <div class="review-item__text">${formatReviewText(review.text)}</div>
+    `;
+    
+    reviewsGrid.appendChild(reviewItem);
+  });
+}
+
+function formatReviewText(text) {
+  // заменяем переносы строк на параграфы
+  const paragraphs = text.split('\n\n').filter(p => p.trim());
+  
+  return paragraphs.map(paragraph => {
+    // заменяем эмодзи на spans для стилизации
+    const formatted = paragraph
+      .replace(/❤️|💕|✨|😊|👶|📸/g, '<span class="emoji">$&</span>')
+      .trim();
+    
+    return `<p>${formatted}</p>`;
+  }).join('');
+}
+
+/* запускаем загрузку при загрузке страницы */
+document.addEventListener('DOMContentLoaded', () => {
+  loadReviews();
+});

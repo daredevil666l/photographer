@@ -2191,3 +2191,430 @@ figcaption {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==================== ABOUT HERO BLOCK ============================ */
+.about-hero {
+  margin-bottom: 8vw;
+}
+
+.about-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 120px);
+  align-items: start;
+}
+
+/* ========== ЛЕВАЯ КОЛОНКА ========================================== */
+.about-hero__text {
+  padding-right: 2vw;
+}
+
+.about-hero__header {
+  margin-bottom: clamp(32px, 4vw, 64px);
+}
+
+.about-hero__label {
+  display: block;
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 4px;
+  color: #999;
+  margin-bottom: 24px;
+}
+
+.about-hero__divider {
+  width: 1px;
+  height: 48px;
+  background: #000;
+  margin-bottom: 32px;
+}
+
+.about-hero__name {
+  font: clamp(24px, 4.2vw, 56px) / 1.1 "Geometria", sans-serif;
+  letter-spacing: 3px;
+  margin: 0 0 16px 0;
+  color: #000;
+  font-weight: 300;
+}
+
+.about-hero__role {
+  display: block;
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 3px;
+  color: #666;
+}
+
+.about-hero__description p {
+  font: clamp(15px, 1.3vw, 18px) / 1.8 "Geometria", sans-serif;
+  color: #444;
+  margin: 0;
+  max-width: 42ch;
+}
+
+/* ========== ПРАВАЯ КОЛОНКА ========================================= */
+.about-hero__photo {
+  position: relative;
+}
+
+.about-hero__photo img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+}
+
+.about-hero__photo:hover img {
+  filter: grayscale(0%);
+}
+
+/* ========== АДАПТИВНОСТЬ =========================================== */
+@media (max-width: 1024px) {
+  .about-hero__grid {
+    gap: clamp(32px, 6vw, 80px);
+  }
+
+  .about-hero__description p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .about-hero__text {
+    padding-right: 0;
+    order: 2;
+  }
+
+  .about-hero__photo {
+    order: 1;
+  }
+
+  .about-hero__photo img {
+    max-height: 60vh;
+  }
+
+  .about-hero__header {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-hero__name {
+    font-size: clamp(20px, 6vw, 32px);
+    letter-spacing: 2px;
+  }
+
+  .about-hero__divider {
+    height: 32px;
+    margin-bottom: 24px;
+  }
+
+  .about-hero__description p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+.about-stats--full {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #111; /* мягкий чёрный, не #000 */
+  color: #fff;
+  padding: 8vw 0 8vw 0;
+  box-sizing: border-box;
+}
+
+.about-stats__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.about-stats__title {
+  text-align: left;
+  font-family: "Geometria", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.25em;
+  color: #eaeaea;
+  margin-bottom: 3vw;
+  font-weight: 400;
+}
+
+.about-stats__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-stats__list li {
+  font-family: "Geometria", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #eaeaea;
+  margin-bottom: 2.2vw;
+  font-weight: 300;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.about-stats__list b {
+  font-weight: 500;
+  color: #fff;
+}
+
+/* адаптивность */
+@media (max-width: 700px) {
+  .about-stats__container {
+    padding: 0 6vw;
+  }
+  .about-stats__title {
+    font-size: 15px;
+    margin-bottom: 5vw;
+  }
+  .about-stats__list li {
+    font-size: 15px;
+    margin-bottom: 4vw;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 420px) {
+  .about-stats__container {
+    padding: 0 2vw;
+  }
+  .about-stats__list li {
+    font-size: 14px;
+    margin-bottom: 5vw;
+  }
+}
+
+/* ==================== ABOUT REVIEWS BLOCK ======================== */
+.about-reviews {
+  background: #f8f8f8;
+  padding: 10vw 0;
+  margin: 8vw 0 0 0;
+}
+
+.about-reviews__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+.about-reviews__title {
+  text-align: center;
+  font: clamp(24px, 3.8vw, 36px) / 1 "Geometria", sans-serif;
+  letter-spacing: 5px;
+  margin-bottom: 8vw;
+  color: #000;
+  font-weight: 300;
+}
+
+.about-reviews__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+.review-item {
+  background: transparent;
+}
+
+.review-item__author {
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.review-item__text {
+  font: clamp(15px, 1.2vw, 17px) / 1.7 "Geometria", sans-serif;
+  color: #444;
+  margin: 0;
+  font-weight: 300;
+}
+
+.review-item__text p {
+  margin: 0 0 1.2rem 0;
+}
+
+.review-item__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* выделение эмодзи и особых элементов */
+.review-item__text .emoji {
+  font-size: 1.1em;
+}
+
+/* ========== АДАПТИВНОСТЬ =========================================== */
+@media (max-width: 768px) {
+  .about-reviews {
+    padding: 12vw 0;
+  }
+
+  .about-reviews__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 8vw, 60px);
+  }
+
+  .about-reviews__title {
+    margin-bottom: 10vw;
+    letter-spacing: 3px;
+  }
+
+  .review-item__author {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-reviews {
+    padding: 16vw 4vw;
+  }
+
+  .about-reviews__title {
+    margin-bottom: 12vw;
+  }
+
+  .review-item__text {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+}
+
+/* ==================== ABOUT PHILOSOPHY BLOCK ===================== */
+.about-philosophy {
+  background: #fff;
+  padding: 8vw 0;
+  margin-top: 0;
+}
+
+.about-philosophy__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+.about-philosophy__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 120px);
+  align-items: center;
+}
+
+/* ========== ЛЕВАЯ КОЛОНКА - ФОТОГРАФИЯ ============================ */
+.about-philosophy__image {
+  position: relative;
+}
+
+.about-philosophy__image img {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+}
+
+.about-philosophy__image:hover img {
+  filter: grayscale(0%);
+}
+
+/* ========== ПРАВАЯ КОЛОНКА - ТЕКСТ ================================ */
+.about-philosophy__content {
+  padding-left: clamp(0px, 2vw, 32px);
+}
+
+.about-philosophy__quote {
+  font: clamp(18px, 2.2vw, 28px) / 1.4 "Geometria", sans-serif;
+  color: #222;
+  margin: 0 0 clamp(24px, 3vw, 48px) 0;
+  font-weight: 300;
+  font-style: normal;
+  quotes: none;
+}
+
+.about-philosophy__text {
+  font: clamp(14px, 1.2vw, 17px) / 1.6 "Geometria", sans-serif;
+  color: #666;
+  margin: 0;
+  font-weight: 300;
+  max-width: 38ch;
+}
+
+/* ========== АДАПТИВНОСТЬ =========================================== */
+@media (max-width: 1024px) {
+  .about-philosophy__grid {
+    gap: clamp(32px, 6vw, 80px);
+  }
+
+  .about-philosophy__quote {
+    font-size: clamp(16px, 3vw, 24px);
+    line-height: 1.35;
+  }
+
+  .about-philosophy__text {
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-philosophy {
+    padding: 10vw 0;
+  }
+
+  .about-philosophy__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-philosophy__image {
+    order: 1;
+  }
+
+  .about-philosophy__content {
+    order: 2;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .about-philosophy__image img {
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-philosophy {
+    padding: 12vw 4vw;
+  }
+
+  .about-philosophy__quote {
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.4;
+    margin-bottom: 32px;
+  }
+
+  .about-philosophy__text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
