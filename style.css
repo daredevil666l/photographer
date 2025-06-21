@@ -2618,3 +2618,654 @@ figcaption {
     line-height: 1.6;
   }
 }
+
+/* ==================== BOOKING PAGE ================================= */
+.booking-page {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.booking-page__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.booking-page__title {
+  text-align: center;
+  font: clamp(32px, 5.2vw, 72px) / 1 "Geometria", sans-serif;
+  letter-spacing: 6px;
+  margin-bottom: 8vw;
+  color: #000;
+}
+
+.booking-page__content {
+  /* контейнер для будущих блоков контента */
+  /* стили будут добавлены при создании блоков */
+}
+
+/* мобильная адаптивность */
+@media (max-width: 899px) {
+  .booking-page {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-page {
+    padding-top: calc(var(--topbar-h) + 12vw);
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+
+  .booking-page__title {
+    margin-bottom: 12vw;
+  }
+}
+
+/* ==================== BOOKING CALENDAR ========================== */
+.booking-calendar {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.booking-calendar__intro {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.booking-calendar__intro h2 {
+  font: clamp(20px, 3vw, 28px) / 1.2 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.booking-calendar__intro p {
+  font: 14px/1.5 "Geometria", sans-serif;
+  color: #666;
+}
+
+/* ========== КАЛЕНДАРЬ ============================================= */
+.calendar-widget {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.calendar-nav {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.calendar-nav:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.calendar-title {
+  font: 18px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #000;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 1rem;
+}
+
+.calendar-weekdays div {
+  padding: 12px 8px;
+  text-align: center;
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #666;
+  background: #f8f8f8;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 14px/1 "Geometria", sans-serif;
+  background: #fff;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.calendar-day.other-month {
+  color: #ccc;
+}
+
+.calendar-day.available {
+  background: #e8f5e8;
+  color: #2d5016;
+  cursor: pointer;
+  border-color: #a8d8a8;
+}
+
+.calendar-day.available:hover {
+  background: #2d5016;
+  color: #fff;
+}
+
+.calendar-day.selected {
+  background: #000;
+  color: #fff;
+}
+
+/* ========== ФОРМА ЗАЯВКИ ========================================== */
+.booking-form {
+  background: #f8f8f8;
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+}
+
+.booking-form h3 {
+  font: 18px/1.2 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Geometria", sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #000;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  color: #000;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #000;
+}
+
+.btn-secondary:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ========== АДАПТИВНОСТЬ ========================================== */
+@media (max-width: 600px) {
+  .calendar-widget {
+    padding: 1.5rem;
+  }
+
+  .calendar-nav {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+/* ==================== CALENDAR ADMIN ============================= */
+.calendar-admin {
+  margin-left: var(--sidebar-w);
+  padding: 8vw 6vw;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+
+.calendar-admin__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.calendar-admin__title {
+  font: clamp(28px, 4.6vw, 48px) / 1 "Geometria", sans-serif;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 6vw;
+  color: #000;
+}
+
+.calendar-admin__section-title {
+  font: clamp(20px, 2.8vw, 32px) / 1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* ========== БЛОК ДОБАВЛЕНИЯ ДАТ =================================== */
+.calendar-admin__add {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.date-picker-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.date-picker-label {
+  display: block;
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* календарь для выбора дат */
+.date-picker-widget {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.date-picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.date-nav {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.date-nav:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.date-title {
+  font: 16px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #000;
+}
+
+.date-picker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 1rem;
+}
+
+.date-picker-weekdays div {
+  padding: 8px 4px;
+  text-align: center;
+  font: 11px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #666;
+  background: #eee;
+}
+
+.date-picker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.date-picker-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 13px/1 "Geometria", sans-serif;
+  background: #fff;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.date-picker-day.other-month {
+  color: #ccc;
+  cursor: default;
+}
+
+.date-picker-day.past {
+  color: #999;
+  cursor: default;
+}
+
+.date-picker-day.available:hover {
+  background: #e0e0e0;
+}
+
+.date-picker-day.selected {
+  background: #000;
+  color: #fff;
+}
+
+.date-picker-day.already-available {
+  background: #e8f5e8;
+  color: #2d5016;
+}
+
+/* список выбранных дат */
+.selected-dates {
+  margin-bottom: 2rem;
+}
+
+.selected-dates h4 {
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.selected-dates-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.selected-date-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f0f0f0;
+  border-radius: 16px;
+  font: 12px/1 "Geometria", sans-serif;
+  color: #333;
+}
+
+.remove-date {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  line-height: 1;
+}
+
+.remove-date:hover {
+  color: #000;
+}
+
+.date-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* ========== БЛОК УПРАВЛЕНИЯ ======================================= */
+.calendar-admin__manage {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-admin__filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.calendar-admin__select {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* список доступных дат */
+.available-dates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.date-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.date-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.date-item.past {
+  opacity: 0.6;
+}
+
+.date-info {
+  margin-bottom: 1rem;
+}
+
+.date-display {
+  font: 16px/1.2 "Geometria", sans-serif;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.date-status {
+  font: 12px/1 "Geometria", sans-serif;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.date-status.future {
+  color: #2d5016;
+}
+
+.date-status.past {
+  color: #999;
+}
+
+.date-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* кнопки */
+.calendar-admin__btn,
+.calendar-admin__btn-secondary,
+.btn-delete-date {
+  padding: 12px 24px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.calendar-admin__btn {
+  background: #000;
+  color: #fff;
+}
+
+.calendar-admin__btn:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-admin__btn:not(:disabled):hover {
+  background: #fff;
+  color: #000;
+}
+
+.calendar-admin__btn-secondary {
+  background: #fff;
+  color: #000;
+}
+
+.calendar-admin__btn-secondary:hover {
+  background: #000;
+  color: #fff;
+}
+
+.btn-delete-date {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+  flex: 1;
+}
+
+.btn-delete-date:hover {
+  background: #fff;
+  color: #dc3545;
+}
+
+/* статусы и уведомления (используем существующие из admin.css) */
+.loading-status {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  display: none;
+}
+
+/* мобильная адаптивность */
+@media (max-width: 899px) {
+  .calendar-admin {
+    margin-left: 0;
+    padding-top: calc(var(--topbar-h) + 8vw);
+  }
+
+  .calendar-admin__add,
+  .calendar-admin__manage {
+    padding: 2rem 1.5rem;
+  }
+
+  .calendar-admin__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .available-dates-list {
+    grid-template-columns: 1fr;
+  }
+
+  .date-actions {
+    flex-direction: column;
+  }
+}

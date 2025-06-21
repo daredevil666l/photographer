@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Управление календарём записи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- существующий sidebar -->
+  <aside class="sidebar">
+    <button id="burger" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="name">EKATERINA<br>AVRAMENKO</div>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <!-- меню -->
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="booking.html">Онлайн запись</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+  </nav>
+
+  <!-- =================== УПРАВЛЕНИЕ КАЛЕНДАРЁМ =================== -->
+  <main class="calendar-admin">
+    <div class="calendar-admin__container">
+      
+      <h1 class="calendar-admin__title">Управление календарём записи</h1>
+      
+      <!-- блок добавления новых дат -->
+      <section class="calendar-admin__add">
+        <h2 class="calendar-admin__section-title">Добавить доступные даты</h2>
+        
+        <div class="add-dates-form">
+          
+          <!-- календарь для выбора дат -->
+          <div class="date-picker-section">
+            <label class="date-picker-label">Выберите даты для записи:</label>
+            
+            <div class="date-picker-widget">
+              <div class="date-picker-header">
+                <button id="datePrevMonth" class="date-nav">←</button>
+                <h3 id="dateCurrentMonth" class="date-title"></h3>
+                <button id="dateNextMonth" class="date-nav">→</button>
+              </div>
+              
+              <div class="date-picker-weekdays">
+                <div>Пн</div><div>Вт</div><div>Ср</div>
+                <div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+              </div>
+              
+              <div id="datePickerDays" class="date-picker-days">
+                <!-- дни будут генерироваться JS -->
+              </div>
+            </div>
+            
+            <div class="selected-dates">
+              <h4>Выбранные даты:</h4>
+              <div id="selectedDatesList" class="selected-dates-list">
+                <!-- список выбранных дат -->
+              </div>
+            </div>
+            
+            <div class="date-actions">
+              <button id="clearSelection" class="calendar-admin__btn-secondary">
+                Очистить выбор
+              </button>
+              <button id="addSelectedDates" class="calendar-admin__btn" disabled>
+                <span>Добавить выбранные даты</span>
+              </button>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- блок управления существующими датами -->
+      <section class="calendar-admin__manage">
+        <h2 class="calendar-admin__section-title">Управление доступными датами</h2>
+        
+        <!-- фильтры и поиск -->
+        <div class="calendar-admin__filters">
+          <select id="monthFilter" class="calendar-admin__select">
+            <option value="">Все месяцы</option>
+          </select>
+          <select id="statusFilter" class="calendar-admin__select">
+            <option value="">Все даты</option>
+            <option value="future">Будущие даты</option>
+            <option value="past">Прошедшие даты</option>
+          </select>
+        </div>
+        
+        <!-- список доступных дат -->
+        <div id="availableDatesList" class="available-dates-list">
+          <!-- будет заполнен через JavaScript -->
+        </div>
+        
+        <!-- статус загрузки -->
+        <div id="loadingStatus" class="loading-status">Загружается...</div>
+        
+      </section>
+
+    </div>
+  </main>
+
+  <!-- уведомления -->
+  <div id="notifications" class="notifications"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
+  <script src="calendar-admin.js"></script>
+</body>
+</html>
