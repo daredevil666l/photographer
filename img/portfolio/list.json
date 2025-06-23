@@ -3,133 +3,77 @@
     "file": "img1.jpg",
     "title": "Свадебная церемония",
     "category": "Свадьба",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2023
   },
   {
     "file": "img2.jpg",
     "title": "Студийный портрет",
     "category": "Портрет",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2022
   },
   {
     "file": "img3.jpg",
     "title": "Семейная фотосессия",
     "category": "Семья",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2023
   },
   {
     "file": "img4.jpg",
     "title": "Уличная фотография",
     "category": "Street",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2021
   },
   {
     "file": "img5.jpg",
     "title": "Пейзаж на рассвете",
     "category": "Природа",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2022
   },
   {
     "file": "img6.jpg",
     "title": "Корпоративное мероприятие",
     "category": "События",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2023
   },
   {
     "file": "img7.jpg",
     "title": "Обмен кольцами",
     "category": "Свадьба",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2021
   },
   {
     "file": "img8.jpg",
     "title": "Арт-портрет",
     "category": "Портрет",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2022
   },
   {
     "file": "img9.jpg",
     "title": "Детская фотосессия",
     "category": "Семья",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2023
   },
   {
     "file": "img10.jpg",
     "title": "Городские контрасты",
     "category": "Street",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2021
   },
   {
     "file": "img11.jpg",
     "title": "Вечерний пейзаж",
     "category": "Природа",
-    "link": "client-template.html"
-  },
-    {
-    "file": "img1.jpg",
-    "title": "Свадебная церемония",
-    "category": "Свадьба",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img2.jpg",
-    "title": "Студийный портрет",
-    "category": "Портрет",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img3.jpg",
-    "title": "Семейная фотосессия",
-    "category": "Семья",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img4.jpg",
-    "title": "Уличная фотография",
-    "category": "Street",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img5.jpg",
-    "title": "Пейзаж на рассвете",
-    "category": "Природа",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img6.jpg",
-    "title": "Корпоративное мероприятие",
-    "category": "События",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img7.jpg",
-    "title": "Обмен кольцами",
-    "category": "Свадьба",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img8.jpg",
-    "title": "Арт-портрет",
-    "category": "Портрет",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img9.jpg",
-    "title": "Детская фотосессия",
-    "category": "Семья",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img10.jpg",
-    "title": "Городские контрасты",
-    "category": "Street",
-    "link": "client-template.html"
-  },
-  {
-    "file": "img11.jpg",
-    "title": "Вечерний пейзаж",
-    "category": "Природа",
-    "link": "client-template.html"
+    "link": "client-template.html",
+    "year": 2022
   }
-
 ]

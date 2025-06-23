@@ -47,10 +47,22 @@
       <!-- блок фильтрации -->
       <div class="portfolio-filters">
         <div class="portfolio-filters__container">
-          <h3 class="portfolio-filters__title">Фильтр по категории:</h3>
-          <div class="portfolio-filters__buttons" id="categoryFilters">
-            <button class="filter-btn active" data-category="">Все</button>
-            <!-- категории будут добавлены динамически -->
+          <!-- фильтр по категориям -->
+          <div class="portfolio-filters__section">
+            <h3 class="portfolio-filters__title">Фильтр по категории:</h3>
+            <div class="portfolio-filters__buttons" id="categoryFilters">
+              <button class="filter-btn active" data-category="">Все</button>
+              <!-- категории будут добавлены динамически -->
+            </div>
+          </div>
+
+          <!-- фильтр по годам -->
+          <div class="portfolio-filters__section">
+            <h3 class="portfolio-filters__title">Фильтр по году:</h3>
+            <div class="portfolio-filters__buttons" id="yearFilters">
+              <button class="filter-btn active" data-year="">Все</button>
+              <!-- годы будут добавлены динамически -->
+            </div>
           </div>
         </div>
       </div>

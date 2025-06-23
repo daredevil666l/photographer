@@ -4094,11 +4094,19 @@ figcaption {
   text-align: center;
 }
 
+.portfolio-filters__section {
+  margin-bottom: 2rem;
+}
+
+.portfolio-filters__section:last-child {
+  margin-bottom: 0;
+}
+
 .portfolio-filters__title {
   font: 14px/1 "Geometria", sans-serif;
   letter-spacing: 2px;
   color: #666;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-transform: uppercase;
 }
 
@@ -4134,14 +4142,29 @@ figcaption {
 }
 
 /* адаптивность фильтров */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .portfolio-filters {
     margin-bottom: 3rem;
+  }
+
+  .portfolio-filters__section {
+    margin-bottom: 1.5rem;
   }
 
   .filter-btn {
     padding: 8px 16px;
     font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio-filters__buttons {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 10px;
   }
 }
 
@@ -4366,3 +4389,197 @@ figcaption {
 .preview-info {
   padding: 0.8rem;
 }
+
+
+/* дополнительные стили для поля года */
+.photo-year {
+  margin: 0.5rem 0;
+  font-size: 11px;
+  color: #666;
+}
+
+.photo-year-input {
+  margin-top: 4px;
+  padding: 4px 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  width: 60px;
+}
+
+/* стили для поля года в превью загрузки */
+.preview-info input[type="number"] {
+  margin-top: 0.5rem;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  width: 100%;
+}
+
+
+/* стили для поля ввода новой категории */
+.new-category-input {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  width: 100%;
+  display: none; /* скрыто по умолчанию */
+}
+
+.new-category-input.show {
+  display: block;
+}
+
+/* стили для поля в существующих фото */
+.photo-new-category {
+  margin: 0.5rem 0;
+  font-size: 11px;
+  color: #666;
+}
+
+.photo-new-category-input {
+  margin-top: 4px;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  width: 100%;
+  display: none;
+}
+
+
+/* ==================== EDIT MODAL ================================== */
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);  /* добавляем фон прямо на модальное окно */
+}
+
+.edit-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;  /* убираем дублирующий фон */
+  cursor: pointer;
+}
+
+.edit-modal__content {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10000;           /* выше overlay */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);  /* добавляем тень */
+  cursor: default;          /* обычный курсор на контенте */
+}
+
+.edit-modal__content h3 {
+  margin: 0 0 1.5rem 0;
+  font: 20px/1.2 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #000;
+  font-weight: 500;
+}
+
+.edit-field {
+  margin-bottom: 1.5rem;
+}
+
+.edit-field label {
+  display: block;
+  font: 13px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.edit-field input,
+.edit-field select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;  /* более заметная граница */
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  background: #fff;           /* явно белый фон */
+  color: #333;               /* явно темный текст */
+  transition: all 0.3s ease;
+}
+
+.edit-field input:focus,
+.edit-field select:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);  /* фокус-тень */
+}
+
+.edit-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 14px 28px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-family: "Geometria", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #000;
+}
+
+.btn-cancel:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-save {
+  background: #000;
+  color: #fff;
+}
+
+.btn-save:hover {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+/* скрытое поле новой категории */
+.new-category-input {
+  display: none;
+  margin-top: 8px;
+}
+
+.new-category-input.show {
+  display: block;
+}
+
+

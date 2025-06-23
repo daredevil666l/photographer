@@ -1,5 +1,5 @@
 /* ==========================================
-   Портфолио с фильтрацией и ссылками
+   Портфолио с фильтрацией по категориям и годам
    ========================================== */
 
 const BATCH = 10;
@@ -9,11 +9,14 @@ const LIST = 'list.json';
 const gallery = document.getElementById('gallery');
 const loader = document.getElementById('loader');
 const categoryFilters = document.getElementById('categoryFilters');
+const yearFilters = document.getElementById('yearFilters');
 
 let portfolioData = [];
 let filteredData = [];
 let allCategories = [];
+let allYears = [];
 let currentCategory = '';
+let currentYear = '';
 let pointer = 0;
 let busy = false;
 
@@ -34,10 +37,11 @@ function createPortfolioItem({ file, title, category, link }) {
     const item = document.createElement('a');
     item.className = 'portfolio-item';
     item.href = link || 'client-template.html';
-    item.target = '_blank'; // открываем в новой вкладке
+    item.target = '_blank';
 
     const img = new Image();
-    img.src = `${PATH}${file}`;
+    const imgPath = `${PATH}${file}`.replace(/\/+/g, '/');
+    img.src = imgPath;
     img.alt = title;
 
     const overlay = document.createElement('div');
@@ -87,9 +91,8 @@ function renderBatch() {
   });
 }
 
-/* ---- создание кнопок фильтрации ---- */
+/* ---- создание кнопок фильтрации по категориям ---- */
 function createCategoryFilters() {
-  // Собираем уникальные категории
   allCategories = [...new Set(portfolioData.map(item => item.category))].sort();
   
   // Очищаем контейнер, оставляя кнопку "Все"
@@ -108,24 +111,63 @@ function createCategoryFilters() {
   });
 }
 
+/* ---- создание кнопок фильтрации по годам ---- */
+function createYearFilters() {
+  allYears = [...new Set(portfolioData.map(item => item.year))].sort((a, b) => b - a); // от новых к старым
+  
+  // Очищаем контейнер, оставляя кнопку "Все"
+  const allButton = yearFilters.querySelector('.filter-btn[data-year=""]');
+  yearFilters.innerHTML = '';
+  yearFilters.appendChild(allButton);
+  
+  // Добавляем кнопки годов
+  allYears.forEach(year => {
+    const button = document.createElement('button');
+    button.className = 'filter-btn';
+    button.dataset.year = year;
+    button.textContent = year;
+    button.addEventListener('click', () => filterByYear(year));
+    yearFilters.appendChild(button);
+  });
+}
+
 /* ---- фильтрация по категориям ---- */
 function filterByCategory(category) {
   currentCategory = category;
   
-  // Обновляем активную кнопку
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  // Обновляем активную кнопку категории
+  categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('active');
   });
-  document.querySelector(`[data-category="${category}"]`).classList.add('active');
+  categoryFilters.querySelector(`[data-category="${category}"]`).classList.add('active');
   
-  // Фильтруем данные
-  if (category === '') {
-    filteredData = [...portfolioData];
-  } else {
-    filteredData = portfolioData.filter(item => item.category === category);
-  }
+  // Применяем фильтры
+  applyFilters();
+}
+
+/* ---- фильтрация по годам ---- */
+function filterByYear(year) {
+  currentYear = year;
   
-  // Сбрасываем галерею
+  // Обновляем активную кнопку года
+  yearFilters.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  yearFilters.querySelector(`[data-year="${year}"]`).classList.add('active');
+  
+  // Применяем фильтры
+  applyFilters();
+}
+
+/* ---- применение всех фильтров ---- */
+function applyFilters() {
+  filteredData = portfolioData.filter(item => {
+    const categoryMatch = currentCategory === '' || item.category === currentCategory;
+    const yearMatch = currentYear === '' || item.year == currentYear;
+    return categoryMatch && yearMatch;
+  });
+  
+  // Сбрасываем галерею и загружаем отфильтрованные данные
   resetGallery();
   renderBatch();
 }
@@ -136,7 +178,7 @@ function resetGallery() {
   pointer = 0;
   busy = false;
   
-  // Заново подключаем скролл, если отключили
+  // Заново подключаем скролл
   window.removeEventListener('scroll', onScroll);
   window.addEventListener('scroll', onScroll);
 }
@@ -158,10 +200,15 @@ fetch(`${PATH}${LIST}`)
     
     // Создаем фильтры
     createCategoryFilters();
+    createYearFilters();
     
-    // Подключаем обработчик "Все"
-    document.querySelector('.filter-btn[data-category=""]').addEventListener('click', () => {
+    // Подключаем обработчики кнопок "Все"
+    categoryFilters.querySelector('.filter-btn[data-category=""]').addEventListener('click', () => {
       filterByCategory('');
+    });
+    
+    yearFilters.querySelector('.filter-btn[data-year=""]').addEventListener('click', () => {
+      filterByYear('');
     });
     
     // Подключаем бесконечный скролл
@@ -180,7 +227,7 @@ window.addEventListener('resize', () => {
   const portfolioItems = document.querySelectorAll('.portfolio-item');
   portfolioItems.forEach(item => {
     const img = item.querySelector('img');
-    if (img) {
+    if (img && img.complete) {
       const ratio = img.naturalHeight / img.naturalWidth;
       const isMobile = window.innerWidth <= 600;
       const coefficient = isMobile ? 8 : 12;
