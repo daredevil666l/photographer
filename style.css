@@ -4082,3 +4082,287 @@ figcaption {
     right: 10px;
   }
 }
+
+/* ==================== PORTFOLIO FILTERS ========================== */
+.portfolio-filters {
+  max-width: 1400px;
+  margin: 0 auto 4rem;
+  padding: 0 5vw;
+}
+
+.portfolio-filters__container {
+  text-align: center;
+}
+
+.portfolio-filters__title {
+  font: 14px/1 "Geometria", sans-serif;
+  letter-spacing: 2px;
+  color: #666;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.portfolio-filters__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #666;
+  font: 12px/1 "Geometria", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: #000;
+  color: #000;
+}
+
+.filter-btn.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* адаптивность фильтров */
+@media (max-width: 600px) {
+  .portfolio-filters {
+    margin-bottom: 3rem;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+}
+
+/* обновление для кликабельных карточек портфолио */
+.gallery .portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  grid-row-end: span var(--row-span);
+  transition: transform 0.3s ease;
+  text-decoration: none; /* убираем подчеркивание ссылки */
+  color: inherit; /* наследуем цвет */
+}
+
+.gallery .portfolio-item:hover {
+  transform: translateY(-4px);
+  text-decoration: none; /* убираем подчеркивание при наведении */
+}
+
+.gallery .portfolio-item:visited {
+  color: inherit; /* убираем изменение цвета посещенных ссылок */
+}
+
+/* ==================== PORTFOLIO LIGHTBOX ========================= */
+.portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 60px; /* отступы для кнопок */
+}
+
+.portfolio-lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+
+.portfolio-lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.portfolio-lightbox__content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio-lightbox__image {
+  max-width: 80vw; /* уменьшили с 95vw до 80vw */
+  max-height: 80vh; /* уменьшили с 95vh до 80vh */
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-lightbox__close {
+  position: fixed; /* изменили с absolute на fixed */
+  top: 20px; /* фиксированное положение от верха экрана */
+  right: 20px; /* фиксированное положение от правого края */
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: "Geometria", sans-serif;
+  z-index: 10001; /* выше остального контента */
+}
+
+.portfolio-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.portfolio-lightbox__nav {
+  position: fixed; /* изменили с absolute на fixed */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: "Geometria", sans-serif;
+  z-index: 10001; /* выше остального контента */
+}
+
+.portfolio-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.portfolio-lightbox__nav--prev {
+  left: 32px; /* фиксированное положение от левого края */
+}
+
+.portfolio-lightbox__nav--next {
+  right: 32px; /* фиксированное положение от правого края */
+}
+
+/* мобильная адаптивность лайтбокса */
+@media (max-width: 768px) {
+  .portfolio-lightbox {
+    padding: 40px 20px; /* меньше отступы на планшетах */
+  }
+
+  .portfolio-lightbox__image {
+    max-width: 85vw; /* больше места для изображения на мобильных */
+    max-height: 75vh;
+  }
+
+  .portfolio-lightbox__close {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .portfolio-lightbox__nav {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .portfolio-lightbox__nav--prev {
+    left: 20px;
+  }
+
+  .portfolio-lightbox__nav--next {
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-lightbox {
+    padding: 20px 10px; /* минимальные отступы на телефонах */
+  }
+
+  .portfolio-lightbox__image {
+    max-width: 90vw;
+    max-height: 70vh;
+  }
+
+  .portfolio-lightbox__close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .portfolio-lightbox__nav {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .portfolio-lightbox__nav--prev {
+    left: 10px;
+  }
+
+  .portfolio-lightbox__nav--next {
+    right: 10px;
+  }
+}
+
+/* дополнительные стили для поля ссылки */
+.preview-info input[type="url"],
+.photo-link-input {
+  margin-top: 0.5rem;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  width: 100%;
+}
+
+.photo-link {
+  margin: 0.5rem 0;
+  font-size: 11px;
+  color: #666;
+}
+
+.photo-link-input {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+/* компактнее делаем карточки с новым полем */
+.photo-info {
+  padding: 10px;
+}
+
+.preview-info {
+  padding: 0.8rem;
+}

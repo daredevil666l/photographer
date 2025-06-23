@@ -42,6 +42,18 @@
     <!-- ====== БЛОК PORTFOLIO ============================================ -->
     <main class="portfolio">
       <h1 class="portfolio-head">ПОРТФОЛИО</h1>
+      <!-- в portfolio.html, после h1.portfolio-head -->
+
+      <!-- блок фильтрации -->
+      <div class="portfolio-filters">
+        <div class="portfolio-filters__container">
+          <h3 class="portfolio-filters__title">Фильтр по категории:</h3>
+          <div class="portfolio-filters__buttons" id="categoryFilters">
+            <button class="filter-btn active" data-category="">Все</button>
+            <!-- категории будут добавлены динамически -->
+          </div>
+        </div>
+      </div>
 
       <!-- контейнер-«водопад» -->
       <div id="gallery" class="gallery"></div>

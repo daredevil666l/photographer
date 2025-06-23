@@ -85,76 +85,9 @@
 
         <!-- обёртка для fade-эффекта -->
         <div class="portfolio-preview__wrapper">
-          <!-- masonry-сетка -->
-          <div class="portfolio-preview__grid">
-            <div class="portfolio-item">
-              <img
-                src="img/portfolio/img1.jpg"
-                alt="Свадебная церемония"
-              />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Свадебная церемония</h3>
-                <span class="portfolio-item__category">Свадьба</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img
-                src="img/portfolio/img2.jpg"
-                alt="Студийный портрет"
-              />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Студийный портрет</h3>
-                <span class="portfolio-item__category">Портрет</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img
-                src="img/portfolio/img3.jpg"
-                alt="Семейная фотосессия"
-              />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Семейная фотосессия</h3>
-                <span class="portfolio-item__category">Семья</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img src="img/portfolio/img4.jpg" alt="Уличная фотография" />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Уличная фотография</h3>
-                <span class="portfolio-item__category">Street</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img src="img/portfolio/img5.jpg" alt="Пейзаж на рассвете" />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Пейзаж на рассвете</h3>
-                <span class="portfolio-item__category">Природа</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img
-                src="img/portfolio/img6.jpg"
-                alt="Корпоративное мероприятие"
-              />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Корпоративное мероприятие</h3>
-                <span class="portfolio-item__category">События</span>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img src="img/portfolio/img7.jpg" alt="Фотосессия в студии" />
-              <div class="portfolio-item__overlay">
-                <h3 class="portfolio-item__title">Фотосессия в студии</h3>
-                <span class="portfolio-item__category">Студия</span>
-              </div>
-            </div>
-            <!-- добавьте столько карточек, сколько нужно -->
+          <!-- masonry-сетка (будет заполнена JavaScript) -->
+          <div class="portfolio-preview__grid" id="previewGrid">
+            <!-- карточки будут добавлены динамически -->
           </div>
 
           <!-- градиент-маска для fade-эффекта -->
@@ -167,6 +100,32 @@
         </a>
       </div>
     </section>
+
+    <!-- лайтбокс для полноэкранного просмотра -->
+    <div id="portfolioLightbox" class="portfolio-lightbox">
+      <div class="portfolio-lightbox__overlay"></div>
+      <div class="portfolio-lightbox__content">
+        <img
+          id="lightboxImage"
+          class="portfolio-lightbox__image"
+          src=""
+          alt=""
+        />
+        <button id="lightboxClose" class="portfolio-lightbox__close">×</button>
+        <button
+          id="lightboxPrev"
+          class="portfolio-lightbox__nav portfolio-lightbox__nav--prev"
+        >
+          ‹
+        </button>
+        <button
+          id="lightboxNext"
+          class="portfolio-lightbox__nav portfolio-lightbox__nav--next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
 
     <!-- SALE / PRINTS ===================================================== -->
     <link

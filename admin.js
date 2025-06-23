@@ -1,5 +1,5 @@
 /* ==========================================
-   Управление портфолио - Frontend
+   Управление портфолио с поддержкой ссылок
    ========================================== */
 
 // Глобальные переменные
@@ -28,18 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ========== DRAG & DROP + ВЫБОР ФАЙЛОВ ============================ */
 function initializeUploadZone() {
-  // Клик по зоне загрузки
   uploadZone.addEventListener('click', () => fileInput.click());
-  
-  // Выбор файлов
   fileInput.addEventListener('change', handleFileSelect);
-  
-  // Drag & Drop
   uploadZone.addEventListener('dragover', handleDragOver);
   uploadZone.addEventListener('dragleave', handleDragLeave);
   uploadZone.addEventListener('drop', handleDrop);
-  
-  // Отправка формы
   uploadForm.addEventListener('submit', handleFormSubmit);
 }
 
@@ -96,6 +89,9 @@ function updateFilePreview() {
         <option value="Природа">Природа</option>
         <option value="События">События</option>
       </select>
+      <input type="url" placeholder="Ссылка на фотосессию" 
+             data-index="${index}" data-field="link" 
+             pattern="https?://.+" title="Введите корректный URL (например: https://example.com)">
     `;
     
     const removeBtn = document.createElement('button');
@@ -130,26 +126,48 @@ function handleFormSubmit(e) {
   const formData = new FormData();
   const photosData = [];
   
+  let hasErrors = false;
+  
   selectedFiles.forEach((file, index) => {
     const titleInput = document.querySelector(`input[data-index="${index}"][data-field="title"]`);
     const categorySelect = document.querySelector(`select[data-index="${index}"][data-field="category"]`);
+    const linkInput = document.querySelector(`input[data-index="${index}"][data-field="link"]`);
     
     if (!titleInput.value || !categorySelect.value) {
-      showNotification('Заполните все поля для каждой фотографии', 'error');
+      showNotification('Заполните название и категорию для каждой фотографии', 'error');
+      hasErrors = true;
+      return;
+    }
+    
+    // Проверяем корректность URL, если указан
+    const linkValue = linkInput.value.trim();
+    if (linkValue && !isValidUrl(linkValue)) {
+      showNotification('Укажите корректную ссылку (начинающуюся с http:// или https://)', 'error');
+      hasErrors = true;
       return;
     }
     
     formData.append('files[]', file);
     photosData.push({
       title: titleInput.value,
-      category: categorySelect.value
+      category: categorySelect.value,
+      link: linkValue || 'client-template.html' // значение по умолчанию
     });
   });
   
-  formData.append('photosData', JSON.stringify(photosData));
+  if (hasErrors) return;
   
-  // Отправляем на сервер (PHP обработчик)
+  formData.append('photosData', JSON.stringify(photosData));
   uploadFiles(formData);
+}
+
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return string.startsWith('http://') || string.startsWith('https://');
+  } catch (_) {
+    return false;
+  }
 }
 
 async function uploadFiles(formData) {
@@ -168,7 +186,7 @@ async function uploadFiles(formData) {
     if (result.success) {
       showNotification('Фотографии успешно загружены!', 'success');
       resetForm();
-      loadExistingPhotos(); // Обновляем список
+      loadExistingPhotos();
     } else {
       throw new Error(result.message || 'Ошибка загрузки');
     }
@@ -194,7 +212,6 @@ async function loadExistingPhotos() {
   try {
     loadingStatus.style.display = 'block';
     
-    // ЗДЕСЬ БУДЕТ ЗАПРОС К PHP ИЛИ ПРЯМО К JSON
     const response = await fetch('img/portfolio/list.json');
     const photos = await response.json();
     
@@ -226,6 +243,15 @@ function renderPhotosList() {
       <div class="photo-info">
         <div class="photo-title">${photo.title}</div>
         <div class="photo-category">${photo.category}</div>
+        <div class="photo-link">
+          Ссылка: 
+          <input type="url" value="${photo.link || ''}" 
+                 data-file="${photo.file}" 
+                 class="photo-link-input" 
+                 pattern="https?://.+" 
+                 title="Введите корректный URL"
+                 onchange="updatePhotoLink('${photo.file}', this.value)">
+        </div>
         <div class="photo-actions">
           <button class="btn-edit" onclick="editPhoto(${index})">Редактировать</button>
           <button class="btn-delete" onclick="deletePhoto(${index}, '${photo.file}')">Удалить</button>
@@ -234,6 +260,47 @@ function renderPhotosList() {
     `;
     photosList.appendChild(photoItem);
   });
+}
+
+/* ========== ОБНОВЛЕНИЕ ССЫЛКИ НА МЕСТЕ ============================= */
+async function updatePhotoLink(filename, newLink) {
+  // Валидация ссылки
+  if (newLink && !isValidUrl(newLink)) {
+    showNotification('Укажите корректную ссылку (начинающуюся с http:// или https://)', 'error');
+    loadExistingPhotos(); // сброс поля к исходному значению
+    return;
+  }
+  
+  try {
+    // ЗДЕСЬ БУДЕТ ОТПРАВКА НА PHP
+    const response = await fetch('update_photo_link.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        file: filename,
+        link: newLink || 'client-template.html'
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showNotification('Ссылка обновлена!', 'success');
+      // Обновляем локальные данные
+      const photoIndex = allPhotos.findIndex(p => p.file === filename);
+      if (photoIndex !== -1) {
+        allPhotos[photoIndex].link = newLink || 'client-template.html';
+        filteredPhotos = [...allPhotos];
+        applyFilters(); // переприменяем фильтры
+      }
+    } else {
+      throw new Error(result.message);
+    }
+    
+  } catch (error) {
+    showNotification('Ошибка при обновлении ссылки: ' + error.message, 'error');
+    loadExistingPhotos(); // сброс к исходному состоянию
+  }
 }
 
 /* ========== ФИЛЬТРАЦИЯ И ПОИСК ===================================== */
@@ -260,8 +327,15 @@ async function editPhoto(index) {
   const photo = filteredPhotos[index];
   const newTitle = prompt('Новое название:', photo.title);
   const newCategory = prompt('Новая категория:', photo.category);
+  const newLink = prompt('Новая ссылка:', photo.link || '');
   
   if (newTitle && newCategory) {
+    // Валидация ссылки
+    if (newLink && !isValidUrl(newLink)) {
+      showNotification('Укажите корректную ссылку (начинающуюся с http:// или https://)', 'error');
+      return;
+    }
+    
     try {
       // ЗДЕСЬ БУДЕТ ОТПРАВКА НА PHP
       const response = await fetch('update_photo.php', {
@@ -270,7 +344,8 @@ async function editPhoto(index) {
         body: JSON.stringify({
           file: photo.file,
           title: newTitle,
-          category: newCategory
+          category: newCategory,
+          link: newLink || 'client-template.html'
         })
       });
       

@@ -1,33 +1,40 @@
 /* ==========================================
-   Динамическая подгрузка фотографий портфолио
+   Портфолио с фильтрацией и ссылками
    ========================================== */
 
-// Настройки
-const BATCH = 10;                 // размер одной порции
-const PATH = 'img/portfolio/';    // папка с изображениями
-const LIST = 'list.json';         // файл-список объектов
+const BATCH = 10;
+const PATH = 'img/portfolio/';
+const LIST = 'list.json';
 
 const gallery = document.getElementById('gallery');
 const loader = document.getElementById('loader');
+const categoryFilters = document.getElementById('categoryFilters');
 
-let portfolioData = [];           // полный массив объектов {file, title, category}
-let pointer = 0;                  // сколько уже выведено
+let portfolioData = [];
+let filteredData = [];
+let allCategories = [];
+let currentCategory = '';
+let pointer = 0;
 let busy = false;
 
 /* ---- функция для автоматического расчёта высоты ---- */
 function setMasonryHeight(item, img) {
   if (img && img.complete && img.naturalWidth && img.naturalHeight) {
     const ratio = img.naturalHeight / img.naturalWidth;
-    const rowSpan = Math.ceil(ratio * 12); // коэффициент плотности
+    const isMobile = window.innerWidth <= 600;
+    const coefficient = isMobile ? 8 : 12;
+    const rowSpan = Math.ceil(ratio * coefficient);
     item.style.setProperty('--row-span', rowSpan);
   }
 }
 
-/* ---- создание одной карточки ---- */
-function createPortfolioItem({ file, title, category }) {
+/* ---- создание одной карточки как ссылки ---- */
+function createPortfolioItem({ file, title, category, link }) {
   return new Promise(resolve => {
-    const item = document.createElement('div');
+    const item = document.createElement('a');
     item.className = 'portfolio-item';
+    item.href = link || 'client-template.html';
+    item.target = '_blank'; // открываем в новой вкладке
 
     const img = new Image();
     img.src = `${PATH}${file}`;
@@ -48,7 +55,6 @@ function createPortfolioItem({ file, title, category }) {
     };
 
     img.onerror = () => {
-      // если фото не загрузилось, возвращаем пустой фрагмент
       resolve(document.createDocumentFragment());
     };
   });
@@ -56,12 +62,12 @@ function createPortfolioItem({ file, title, category }) {
 
 /* ---- вывод очередной порции ---- */
 function renderBatch() {
-  if (busy || pointer >= portfolioData.length) return;
+  if (busy || pointer >= filteredData.length) return;
   
   busy = true;
   loader.classList.add('active');
 
-  const slice = portfolioData.slice(pointer, pointer + BATCH);
+  const slice = filteredData.slice(pointer, pointer + BATCH);
   const promises = slice.map(createPortfolioItem);
 
   Promise.all(promises).then(items => {
@@ -75,11 +81,64 @@ function renderBatch() {
     busy = false;
     loader.classList.remove('active');
 
-    // если все фото показали, убираем обработчик скролла
-    if (pointer >= portfolioData.length) {
+    if (pointer >= filteredData.length) {
       window.removeEventListener('scroll', onScroll);
     }
   });
+}
+
+/* ---- создание кнопок фильтрации ---- */
+function createCategoryFilters() {
+  // Собираем уникальные категории
+  allCategories = [...new Set(portfolioData.map(item => item.category))].sort();
+  
+  // Очищаем контейнер, оставляя кнопку "Все"
+  const allButton = categoryFilters.querySelector('.filter-btn[data-category=""]');
+  categoryFilters.innerHTML = '';
+  categoryFilters.appendChild(allButton);
+  
+  // Добавляем кнопки категорий
+  allCategories.forEach(category => {
+    const button = document.createElement('button');
+    button.className = 'filter-btn';
+    button.dataset.category = category;
+    button.textContent = category;
+    button.addEventListener('click', () => filterByCategory(category));
+    categoryFilters.appendChild(button);
+  });
+}
+
+/* ---- фильтрация по категориям ---- */
+function filterByCategory(category) {
+  currentCategory = category;
+  
+  // Обновляем активную кнопку
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.querySelector(`[data-category="${category}"]`).classList.add('active');
+  
+  // Фильтруем данные
+  if (category === '') {
+    filteredData = [...portfolioData];
+  } else {
+    filteredData = portfolioData.filter(item => item.category === category);
+  }
+  
+  // Сбрасываем галерею
+  resetGallery();
+  renderBatch();
+}
+
+/* ---- сброс галереи ---- */
+function resetGallery() {
+  gallery.innerHTML = '';
+  pointer = 0;
+  busy = false;
+  
+  // Заново подключаем скролл, если отключили
+  window.removeEventListener('scroll', onScroll);
+  window.addEventListener('scroll', onScroll);
 }
 
 /* ---- обработчик бесконечного скролла ---- */
@@ -95,27 +154,38 @@ fetch(`${PATH}${LIST}`)
   .then(response => response.json())
   .then(data => {
     portfolioData = data;
+    filteredData = [...data];
     
-    // подключаем бесконечный скролл
+    // Создаем фильтры
+    createCategoryFilters();
+    
+    // Подключаем обработчик "Все"
+    document.querySelector('.filter-btn[data-category=""]').addEventListener('click', () => {
+      filterByCategory('');
+    });
+    
+    // Подключаем бесконечный скролл
     window.addEventListener('scroll', onScroll);
     
-    // загружаем первую порцию
+    // Загружаем первую порцию
     renderBatch();
   })
   .catch(error => {
     console.error('Ошибка загрузки портфолио:', error);
     loader.style.display = 'none';
   });
-/* ---- функция для автоматического расчёта высоты ---- */
-function setMasonryHeight(item, img) {
-  if (img && img.complete && img.naturalWidth && img.naturalHeight) {
-    const ratio = img.naturalHeight / img.naturalWidth;
-    
-    // уменьшаем коэффициент для мобильных
-    const isMobile = window.innerWidth <= 600;
-    const coefficient = isMobile ? 8 : 12; // меньше строк на мобильных
-    
-    const rowSpan = Math.ceil(ratio * coefficient);
-    item.style.setProperty('--row-span', rowSpan);
-  }
-}
+
+/* принудительное обновление masonry при ресайзе */
+window.addEventListener('resize', () => {
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  portfolioItems.forEach(item => {
+    const img = item.querySelector('img');
+    if (img) {
+      const ratio = img.naturalHeight / img.naturalWidth;
+      const isMobile = window.innerWidth <= 600;
+      const coefficient = isMobile ? 8 : 12;
+      const rowSpan = Math.ceil(ratio * coefficient);
+      item.style.setProperty('--row-span', rowSpan);
+    }
+  });
+});

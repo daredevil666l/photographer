@@ -1,78 +1,135 @@
 [
-  { "file": "img1.jpg", "title": "Свадебная церемония", "category": "Свадьба" },
-  { "file": "img2.jpg", "title": "Студийный портрет", "category": "Портрет" },
-  { "file": "img3.jpg", "title": "Семейная фотосессия", "category": "Семья" },
-  { "file": "img4.jpg", "title": "Уличная фотография", "category": "Street" },
-  { "file": "img5.jpg", "title": "Пейзаж на рассвете", "category": "Природа" },
+  {
+    "file": "img1.jpg",
+    "title": "Свадебная церемония",
+    "category": "Свадьба",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img2.jpg",
+    "title": "Студийный портрет",
+    "category": "Портрет",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img3.jpg",
+    "title": "Семейная фотосессия",
+    "category": "Семья",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img4.jpg",
+    "title": "Уличная фотография",
+    "category": "Street",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img5.jpg",
+    "title": "Пейзаж на рассвете",
+    "category": "Природа",
+    "link": "client-template.html"
+  },
   {
     "file": "img6.jpg",
     "title": "Корпоративное мероприятие",
-    "category": "События"
+    "category": "События",
+    "link": "client-template.html"
   },
-  { "file": "img7.jpg", "title": "Обмен кольцами", "category": "Свадьба" },
-  { "file": "img8.jpg", "title": "Арт-портрет", "category": "Портрет" },
-  { "file": "img9.jpg", "title": "Детская фотосессия", "category": "Семья" },
-  { "file": "img10.jpg", "title": "Городские контрасты", "category": "Street" },
-  { "file": "img11.jpg", "title": "Городские контрасты", "category": "Street" },
-    { "file": "img1.jpg", "title": "Свадебная церемония", "category": "Свадьба" },
-  { "file": "img2.jpg", "title": "Студийный портрет", "category": "Портрет" },
-  { "file": "img3.jpg", "title": "Семейная фотосессия", "category": "Семья" },
-  { "file": "img4.jpg", "title": "Уличная фотография", "category": "Street" },
-  { "file": "img5.jpg", "title": "Пейзаж на рассвете", "category": "Природа" },
+  {
+    "file": "img7.jpg",
+    "title": "Обмен кольцами",
+    "category": "Свадьба",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img8.jpg",
+    "title": "Арт-портрет",
+    "category": "Портрет",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img9.jpg",
+    "title": "Детская фотосессия",
+    "category": "Семья",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img10.jpg",
+    "title": "Городские контрасты",
+    "category": "Street",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img11.jpg",
+    "title": "Вечерний пейзаж",
+    "category": "Природа",
+    "link": "client-template.html"
+  },
+    {
+    "file": "img1.jpg",
+    "title": "Свадебная церемония",
+    "category": "Свадьба",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img2.jpg",
+    "title": "Студийный портрет",
+    "category": "Портрет",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img3.jpg",
+    "title": "Семейная фотосессия",
+    "category": "Семья",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img4.jpg",
+    "title": "Уличная фотография",
+    "category": "Street",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img5.jpg",
+    "title": "Пейзаж на рассвете",
+    "category": "Природа",
+    "link": "client-template.html"
+  },
   {
     "file": "img6.jpg",
     "title": "Корпоративное мероприятие",
-    "category": "События"
+    "category": "События",
+    "link": "client-template.html"
   },
-  { "file": "img7.jpg", "title": "Обмен кольцами", "category": "Свадьба" },
-  { "file": "img8.jpg", "title": "Арт-портрет", "category": "Портрет" },
-  { "file": "img9.jpg", "title": "Детская фотосессия", "category": "Семья" },
-  { "file": "img10.jpg", "title": "Городские контрасты", "category": "Street" },
-  { "file": "img11.jpg", "title": "Городские контрасты", "category": "Street" },
-    { "file": "img1.jpg", "title": "Свадебная церемония", "category": "Свадьба" },
-  { "file": "img2.jpg", "title": "Студийный портрет", "category": "Портрет" },
-  { "file": "img3.jpg", "title": "Семейная фотосессия", "category": "Семья" },
-  { "file": "img4.jpg", "title": "Уличная фотография", "category": "Street" },
-  { "file": "img5.jpg", "title": "Пейзаж на рассвете", "category": "Природа" },
   {
-    "file": "img6.jpg",
-    "title": "Корпоративное мероприятие",
-    "category": "События"
+    "file": "img7.jpg",
+    "title": "Обмен кольцами",
+    "category": "Свадьба",
+    "link": "client-template.html"
   },
-  { "file": "img7.jpg", "title": "Обмен кольцами", "category": "Свадьба" },
-  { "file": "img8.jpg", "title": "Арт-портрет", "category": "Портрет" },
-  { "file": "img9.jpg", "title": "Детская фотосессия", "category": "Семья" },
-  { "file": "img10.jpg", "title": "Городские контрасты", "category": "Street" },
-  { "file": "img11.jpg", "title": "Городские контрасты", "category": "Street" },
-    { "file": "img1.jpg", "title": "Свадебная церемония", "category": "Свадьба" },
-  { "file": "img2.jpg", "title": "Студийный портрет", "category": "Портрет" },
-  { "file": "img3.jpg", "title": "Семейная фотосессия", "category": "Семья" },
-  { "file": "img4.jpg", "title": "Уличная фотография", "category": "Street" },
-  { "file": "img5.jpg", "title": "Пейзаж на рассвете", "category": "Природа" },
   {
-    "file": "img6.jpg",
-    "title": "Корпоративное мероприятие",
-    "category": "События"
+    "file": "img8.jpg",
+    "title": "Арт-портрет",
+    "category": "Портрет",
+    "link": "client-template.html"
   },
-  { "file": "img7.jpg", "title": "Обмен кольцами", "category": "Свадьба" },
-  { "file": "img8.jpg", "title": "Арт-портрет", "category": "Портрет" },
-  { "file": "img9.jpg", "title": "Детская фотосессия", "category": "Семья" },
-  { "file": "img10.jpg", "title": "Городские контрасты", "category": "Street" },
-  { "file": "img11.jpg", "title": "Городские контрасты", "category": "Street" },
-    { "file": "img1.jpg", "title": "Свадебная церемония", "category": "Свадьба" },
-  { "file": "img2.jpg", "title": "Студийный портрет", "category": "Портрет" },
-  { "file": "img3.jpg", "title": "Семейная фотосессия", "category": "Семья" },
-  { "file": "img4.jpg", "title": "Уличная фотография", "category": "Street" },
-  { "file": "img5.jpg", "title": "Пейзаж на рассвете", "category": "Природа" },
   {
-    "file": "img6.jpg",
-    "title": "Корпоративное мероприятие",
-    "category": "События"
+    "file": "img9.jpg",
+    "title": "Детская фотосессия",
+    "category": "Семья",
+    "link": "client-template.html"
   },
-  { "file": "img7.jpg", "title": "Обмен кольцами", "category": "Свадьба" },
-  { "file": "img8.jpg", "title": "Арт-портрет", "category": "Портрет" },
-  { "file": "img9.jpg", "title": "Детская фотосессия", "category": "Семья" },
-  { "file": "img10.jpg", "title": "Городские контрасты", "category": "Street" },
-  { "file": "img11.jpg", "title": "Городские контрасты", "category": "Street" }
+  {
+    "file": "img10.jpg",
+    "title": "Городские контрасты",
+    "category": "Street",
+    "link": "client-template.html"
+  },
+  {
+    "file": "img11.jpg",
+    "title": "Вечерний пейзаж",
+    "category": "Природа",
+    "link": "client-template.html"
+  }
 
 ]
