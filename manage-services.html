@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Управление услугами</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- существующий sidebar -->
+  <aside class="sidebar">
+    <button id="burger" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="name">EKATERINA<br>AVRAMENKO</div>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <!-- меню -->
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="booking.html">Онлайн запись</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+      <li><a href="services.html">Услуги</a></li>
+    </ul>
+  </nav>
+
+  <!-- =================== УПРАВЛЕНИЕ УСЛУГАМИ =================== -->
+  <main class="services-admin">
+    <div class="services-admin__container">
+      
+      <h1 class="services-admin__title">Управление услугами</h1>
+      
+      <!-- блок добавления новой услуги -->
+      <section class="services-admin__add">
+        <h2 class="services-admin__section-title">Добавить новую услугу</h2>
+        
+        <form id="addServiceForm" class="service-form">
+          
+          <div class="service-form__row">
+            <div class="service-form__field">
+              <label>Название услуги *</label>
+              <input type="text" name="title" required placeholder="Свадебная фотосессия">
+            </div>
+            
+            <div class="service-form__field">
+              <label>Цена *</label>
+              <input type="text" name="price" required placeholder="от 50 000 ₽">
+            </div>
+          </div>
+          
+          <div class="service-form__field">
+            <label>Краткое описание *</label>
+            <textarea name="shortDescription" rows="2" required 
+                      placeholder="Краткое описание для карточки услуги..."></textarea>
+          </div>
+          
+          <div class="service-form__field">
+            <label>Полное описание *</label>
+            <textarea name="fullDescription" rows="4" required 
+                      placeholder="Детальное описание услуги для модального окна..."></textarea>
+          </div>
+          
+          <div class="service-form__field">
+            <label>Особенности услуги (каждая с новой строки)</label>
+            <textarea name="features" rows="4" 
+                      placeholder="Съёмка полного дня (8-10 часов)&#10;300+ обработанных фотографий&#10;Онлайн-галерея для гостей"></textarea>
+          </div>
+          
+          <!-- загрузка изображения -->
+          <div class="service-form__field">
+            <label>Изображение услуги *</label>
+            <div class="service-upload-zone" id="serviceUploadZone">
+              <input type="file" id="serviceFileInput" accept="image/*" hidden required>
+              <div class="service-upload-content">
+                <svg class="service-upload-icon" viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                  <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <p>Нажмите или перетащите изображение сюда</p>
+                <span>Поддерживаются: JPG, PNG, WebP</span>
+              </div>
+            </div>
+            
+            <!-- превью изображения -->
+            <div id="serviceImagePreview" class="service-image-preview"></div>
+          </div>
+          
+          <div class="service-form__actions">
+            <button type="submit" class="services-admin__btn">
+              <span>Добавить услугу</span>
+            </button>
+          </div>
+          
+        </form>
+      </section>
+
+      <!-- блок управления существующими услугами -->
+      <section class="services-admin__manage">
+        <h2 class="services-admin__section-title">Управление услугами</h2>
+        
+        <!-- список услуг -->
+        <div id="servicesList" class="services-list">
+          <!-- будет заполнен через JavaScript -->
+        </div>
+        
+        <!-- статус загрузки -->
+        <div id="loadingStatus" class="loading-status">Загружается...</div>
+        
+      </section>
+
+    </div>
+  </main>
+
+  <!-- модальное окно редактирования услуги -->
+  <div id="editServiceModal" class="edit-service-modal">
+    <div class="edit-service-modal__overlay"></div>
+    <div class="edit-service-modal__content">
+      <h3>Редактировать услугу</h3>
+      
+      <form id="editServiceForm" class="service-form">
+        
+        <div class="service-form__row">
+          <div class="service-form__field">
+            <label>Название услуги *</label>
+            <input type="text" id="editTitle" required>
+          </div>
+          
+          <div class="service-form__field">
+            <label>Цена *</label>
+            <input type="text" id="editPrice" required>
+          </div>
+        </div>
+        
+        <div class="service-form__field">
+          <label>Краткое описание *</label>
+          <textarea id="editShortDescription" rows="2" required></textarea>
+        </div>
+        
+        <div class="service-form__field">
+          <label>Полное описание *</label>
+          <textarea id="editFullDescription" rows="4" required></textarea>
+        </div>
+        
+        <div class="service-form__field">
+          <label>Особенности услуги (каждая с новой строки)</label>
+          <textarea id="editFeatures" rows="4"></textarea>
+        </div>
+        
+        <!-- текущее изображение и загрузка нового -->
+        <div class="service-form__field">
+          <label>Изображение услуги</label>
+          <div class="current-image">
+            <img id="currentServiceImage" src="" alt="Текущее изображение">
+          </div>
+          
+          <div class="service-upload-zone" id="editServiceUploadZone">
+            <input type="file" id="editServiceFileInput" accept="image/*" hidden>
+            <div class="service-upload-content">
+              <p>Загрузить новое изображение</p>
+              <span>Оставьте пустым, чтобы сохранить текущее</span>
+            </div>
+          </div>
+          
+          <div id="editServiceImagePreview" class="service-image-preview"></div>
+        </div>
+        
+        <div class="edit-actions">
+          <button type="button" class="btn-cancel">Отмена</button>
+          <button type="submit" class="btn-save">Сохранить</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+  <!-- уведомления -->
+  <div id="notifications" class="notifications"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
+  <script src="services-admin.js"></script>
+</body>
+</html>

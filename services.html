@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Услуги</title>
+
+    <!-- meta и стили -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- существующий sidebar/topbar -->
+    <aside class="sidebar">
+      <button id="burger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="name">EKATERINA<br />AVRAMENKO</div>
+    </aside>
+
+    <!-- overlay для закрытия меню -->
+    <div id="overlay"></div>
+
+    <!-- навигационное меню -->
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="portfolio.html">Портфолио</a></li>
+        <li><a href="about.html">Обо&nbsp;мне</a></li>
+        <li><a href="booking.html">Онлайн&nbsp;запись</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="services.html">Услуги</a></li>
+      </ul>
+    </nav>
+
+    <!-- =================== КОНТЕНТ СТРАНИЦЫ =================== -->
+    <main class="services-page">
+      <div class="services-page__container">
+        <h1 class="services-page__title">УСЛУГИ</h1>
+
+        <!-- здесь будут добавляться блоки контента -->
+        <!-- контент страницы услуг -->
+        <div class="services-page__content">
+          <!-- сетка карточек услуг -->
+          <div class="services-grid" id="servicesGrid">
+            <!-- карточки будут загружены через JavaScript -->
+          </div>
+        </div>
+
+        <!-- модальное окно для детальной информации об услуге -->
+        <div id="serviceModal" class="service-modal">
+          <div class="service-modal__overlay"></div>
+          <div class="service-modal__content">
+            <button class="service-modal__close">&times;</button>
+
+            <div class="service-modal__header">
+              <img class="service-modal__image" src="" alt="" />
+              <div class="service-modal__info">
+                <h2 class="service-modal__title"></h2>
+                <div class="service-modal__price"></div>
+              </div>
+            </div>
+
+            <div class="service-modal__body">
+              <p class="service-modal__description"></p>
+              <ul class="service-modal__features"></ul>
+            </div>
+
+            <div class="service-modal__footer">
+              <a href="booking.html" class="service-modal__book-btn">
+                <span>Записаться на съёмку</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-page__content">
+          <!-- контент будет добавлен позже -->
+        </div>
+      </div>
+    </main>
+
+    <!-- подключение скриптов -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+    <script src="services.js"></script>
+    <!-- новый скрипт -->
+  </body>
+</html>
