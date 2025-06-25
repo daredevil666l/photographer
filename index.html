@@ -50,29 +50,30 @@
     <!-- ABOUT ============================================================= -->
     <section class="about" id="about">
       <div class="about-grid">
-        <!-- левая колонка --------------------------------------------------->
+        <!-- левая колонка (уменьшенная) -->
         <header class="about-head">
           <small class="about-label">ОБО МНЕ</small>
           <h2 class="about-title">ПРИВЕТ!<br />МЕНЯ<br />ЗОВУТ<br />КАТЯ.</h2>
         </header>
 
-        <!-- коллаж --------------------------------------------------------->
-        <div class="about-photos">
-          <figure class="photo photo--big">
-            <img src="img/img1.jpg" alt="Работа фотографа" />
-          </figure>
-
-          <figure class="photo photo--small">
-            <img src="img/woman.jpg" alt="Фотограф с камерой" />
+        <!-- центральная фотография (увеличенная) -->
+        <div class="about-photo">
+          <figure class="photo">
+            <img src="img/woman.jpg" alt="Фотограф с камерой" data-parallax="cursor"/>
           </figure>
         </div>
 
-        <!-- правая колонка ------------------------------------------------->
+        <!-- правая колонка (увеличенная) -->
         <div class="about-text">
           <p>
             Жизнь — это путь. Фотография — его важная часть, которой я посвящаю
             уже более 18 лет. Снимаю людей, семьи, город, уютные кафе — всё, что
             люблю.
+          </p>
+          <p>
+            Во всех этих жанрах непридуманной фотографии я вижу простые "радости
+            жизни" и звенящую хрупкость момента, который невозможно остановить,
+            но который можно запомнить, если вовремя нажать на кнопку.
           </p>
           <button class="about-btn">УЗНАТЬ БОЛЬШЕ</button>
         </div>
@@ -134,11 +135,10 @@
       href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
     />
 
-    <section class="sale" id="prints">
+    <!-- <section class="sale" id="prints">
       <h2 class="sale__head">ПРОДАЖА РАБОТ</h2>
 
       <div class="sale__grid">
-        <!-- левая текстовая колонка -->
         <div class="sale__text">
           <p>
             Привычка воспринимать новые места через фотоаппарат сформировалась у
@@ -160,7 +160,6 @@
           <button class="sale__btn"><span>ПОСМОТРЕТЬ РАБОТЫ</span></button>
         </div>
 
-        <!-- правая колонка: слайдер -->
         <div class="sale__slider swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -171,10 +170,8 @@
               <img src="img/img2.jpg" alt="Фотография 2" />
             </div>
 
-            <!-- добавляйте ещё слайды по той же схеме -->
           </div>
 
-          <!-- стрелки -->
           <button class="sale-nav prev" aria-label="Предыдущий">
             <svg viewBox="0 0 24 24">
               <path
@@ -202,7 +199,7 @@
           </button>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- CONTACTS ========================================================== -->
     <section class="contacts" id="contacts">
