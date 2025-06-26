@@ -1,0 +1,133 @@
+<?php
+/**
+* Template Name: booking
+*/
+get_header();
+?>
+<!-- =================== КОНТЕНТ СТРАНИЦЫ =================== -->
+<main class="booking-page">
+  <div class="booking-page__container">
+    <h1 class="booking-page__title">ОНЛАЙН ЗАПИСЬ</h1>
+
+    <!-- блок календаря и записи -->
+    <section class="booking-calendar">
+      <div class="booking-calendar__container">
+        <div class="booking-calendar__intro">
+          <h2>Выберите удобную дату</h2>
+          <p>
+            Зелёным цветом отмечены дни, доступные для записи на фотосессию
+          </p>
+        </div>
+
+        <!-- календарь -->
+        <div class="calendar-widget">
+          <div class="calendar-header">
+            <button id="prevMonth" class="calendar-nav">←</button>
+            <h3 id="currentMonth" class="calendar-title"></h3>
+            <button id="nextMonth" class="calendar-nav">→</button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <div>Пн</div>
+            <div>Вт</div>
+            <div>Ср</div>
+            <div>Чт</div>
+            <div>Пт</div>
+            <div>Сб</div>
+            <div>Вс</div>
+          </div>
+
+          <div id="calendarDays" class="calendar-days">
+            <!-- дни будут генерироваться JS -->
+          </div>
+          
+          <!-- индикатор загрузки -->
+          <div id="calendarLoader" class="calendar-loader" style="display: none;">
+            Загрузка доступных дат...
+          </div>
+        </div>
+
+        <!-- форма заявки -->
+        <div id="bookingForm" class="booking-form" style="display: none">
+          <h3>Запись на <span id="selectedDate"></span></h3>
+
+          <form id="submitBooking">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Имя *</label>
+                <input type="text" name="name" required />
+              </div>
+              <div class="form-field">
+                <label>Телефон *</label>
+                <input type="tel" name="phone" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Email *</label>
+              <input type="email" name="email" required />
+            </div>
+
+            <div class="form-field">
+              <label>Тип съёмки</label>
+              <select name="session_type">
+                <option value="">Выберите тип</option>
+                <option value="portrait">Портретная съёмка</option>
+                <option value="family">Семейная съёмка</option>
+                <option value="wedding">Свадебная съёмка</option>
+                <option value="event">Событийная съёмка</option>
+                <option value="other">Другое</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Комментарий</label>
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="Расскажите о пожеланиях к съёмке..."
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                id="cancelBooking"
+                class="btn-secondary"
+              >
+                Отмена
+              </button>
+              <button type="submit" class="btn-primary">
+                <span>Отправить заявку</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="booking-page__content">
+      <!-- дополнительный контент -->
+    </div>
+  </div>
+</main>
+
+<!-- уведомления -->
+<div id="notifications" class="notifications"></div>
+
+<script>
+// Передаем данные в JavaScript
+window.bookingData = {
+    ajaxUrl: '<?php echo admin_url('admin-ajax.php'); ?>',
+    submitUrl: '<?php echo get_stylesheet_directory_uri(); ?>/submit-booking.php',
+    nonce: '<?php echo wp_create_nonce('booking_nonce'); ?>'
+};
+</script>
+
+
+<?php wp_footer();?>
+<?php get_footer();?>
+
+<script src="<?php echo get_stylesheet_directory_uri();?>/js/booking.js"></script>
+</body>
+</html>

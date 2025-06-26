@@ -1,39 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Услуги</title>
-
-    <!-- meta и стили -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- существующий sidebar/topbar -->
-    <aside class="sidebar">
-      <button id="burger" aria-label="Открыть меню">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="name">EKATERINA<br />AVRAMENKO</div>
-    </aside>
-
-    <!-- overlay для закрытия меню -->
-    <div id="overlay"></div>
-
-    <!-- навигационное меню -->
-    <nav class="menu">
-      <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="portfolio.html">Портфолио</a></li>
-        <li><a href="about.html">Обо&nbsp;мне</a></li>
-        <li><a href="booking.html">Онлайн&nbsp;запись</a></li>
-        <li><a href="contacts.html">Контакты</a></li>
-        <li><a href="services.html">Услуги</a></li>
-      </ul>
-    </nav>
+    <?php
+    /**
+    * Template Name: services
+    */
+    get_header();
+    ?>
 
     <!-- =================== КОНТЕНТ СТРАНИЦЫ =================== -->
     <main class="services-page">
@@ -69,7 +39,7 @@
             </div>
 
             <div class="service-modal__footer">
-              <a href="booking.html" class="service-modal__book-btn">
+              <a href="<?php echo get_page_link(15);?>" class="service-modal__book-btn">
                 <span>Записаться на съёмку</span>
               </a>
             </div>
@@ -83,9 +53,19 @@
     </main>
 
     <!-- подключение скриптов -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="main.js"></script>
-    <script src="services.js"></script>
+    <?php wp_footer();?>
+    <?php get_footer();?>
+
+    <script src="<?php echo get_stylesheet_directory_uri();?>/js/services.js"></script>
     <!-- новый скрипт -->
+
+    <script>
+    // Передаем данные в JavaScript
+    window.servicesData = {
+        ajaxUrl: '<?php echo admin_url('admin-ajax.php'); ?>',
+        nonce: '<?php echo wp_create_nonce('services_nonce'); ?>'
+    };
+    </script>
+
   </body>
 </html>

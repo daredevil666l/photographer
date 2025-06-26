@@ -1,0 +1,140 @@
+<?php
+/**
+* Template Name: create-client-page
+*/
+
+// Проверяем права доступа
+if (!current_user_can('administrator')) {
+    wp_redirect(home_url());
+    exit;
+}
+
+get_header();
+
+// Получаем категории для селекта
+global $wpdb;
+$categories_table = $wpdb->prefix . 'portfolio_categories';
+$categories = $wpdb->get_results("SELECT * FROM $categories_table ORDER BY name ASC");
+?>
+
+<!-- =================== СОЗДАНИЕ СТРАНИЦЫ КЛИЕНТА =================== -->
+<main class="client-admin">
+  <div class="client-admin__container">
+    
+    <h1 class="client-admin__title">Создать страницу клиента</h1>
+    
+    <form id="createClientForm" class="client-form" enctype="multipart/form-data">
+      
+      <!-- основная информация -->
+      <section class="client-form__section">
+        <h2 class="client-form__section-title">Основная информация</h2>
+        
+        <div class="client-form__row">
+          <div class="client-form__field">
+            <label>Имя клиента *</label>
+            <input type="text" name="client_name" required placeholder="Иван Петров">
+          </div>
+          
+          <div class="client-form__field">
+            <label>Название фотосессии *</label>
+            <input type="text" name="session_title" required placeholder="Семейная фотосессия в парке">
+          </div>
+        </div>
+        
+        <div class="client-form__row">
+          <div class="client-form__field">
+            <label>Категория съёмки</label>
+            <select name="session_category">
+              <option value="">Выберите категорию</option>
+              <?php foreach ($categories as $category): ?>
+                <option value="<?php echo esc_attr($category->slug); ?>">
+                  <?php echo esc_html($category->name); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          
+          <div class="client-form__field">
+            <label>Дата проведения</label>
+            <input type="date" name="session_date">
+          </div>
+        </div>
+        
+        <div class="client-form__field">
+          <label>Описание (необязательно)</label>
+          <textarea name="session_description" rows="3" placeholder="Краткое описание фотосессии..."></textarea>
+        </div>
+      </section>
+
+      <!-- загрузка фотографий -->
+      <section class="client-form__section">
+        <h2 class="client-form__section-title">Фотографии</h2>
+        
+        <div class="client-upload-zone" id="clientUploadZone">
+          <input type="file" id="clientFileInput" name="photos[]" multiple accept="image/*" hidden>
+          <div class="client-upload-content">
+            <svg class="client-upload-icon" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+              <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+              <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <p>Нажмите или перетащите фотографии сюда</p>
+            <span>Поддерживаются: JPG, PNG, WebP</span>
+          </div>
+        </div>
+        
+        <!-- превью загруженных фото -->
+        <div id="clientFilePreview" class="client-file-preview"></div>
+      </section>
+
+      <!-- настройки страницы -->
+      <section class="client-form__section">
+        <h2 class="client-form__section-title">Настройки страницы</h2>
+        
+        <div class="client-form__row">
+          <div class="client-form__field">
+            <label>URL страницы *</label>
+            <div class="url-field">
+              <span class="url-prefix"><?php echo home_url('/client/'); ?></span>
+              <input type="text" name="page_url" required placeholder="ivan-petrov-2025" pattern="[a-z0-9-]+" title="Только строчные буквы, цифры и дефисы">
+            </div>
+          </div>
+          
+          <div class="client-form__field">
+            <label>Пароль доступа</label>
+            <input type="text" name="access_password" placeholder="Оставьте пустым для открытого доступа">
+          </div>
+        </div>
+      </section>
+
+      <!-- кнопки действий -->
+      <div class="client-form__actions">
+        <button type="submit" class="client-form__btn-primary">
+          <span>Создать страницу</span>
+        </button>
+      </div>
+      
+      
+    </form>
+    
+  </div>
+</main>
+
+<!-- уведомления -->
+<div id="notifications" class="notifications"></div>
+
+<script>
+// Передаем данные в JavaScript
+window.clientAdminData = {
+    ajaxUrl: '<?php echo admin_url('admin-ajax.php'); ?>',
+    nonce: '<?php echo wp_create_nonce('client_page_nonce'); ?>'
+};
+</script>
+
+<?php wp_footer();?>
+<?php get_footer();?>
+
+<script src="<?php echo get_stylesheet_directory_uri();?>/js/client-admin.js"></script>
+</body>
+</html>

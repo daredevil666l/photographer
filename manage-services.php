@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Управление услугами</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- существующий sidebar -->
-  <aside class="sidebar">
-    <button id="burger" aria-label="Открыть меню">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="name">EKATERINA<br>AVRAMENKO</div>
-  </aside>
-
-  <div id="overlay"></div>
-
-  <!-- меню -->
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="portfolio.html">Портфолио</a></li>
-      <li><a href="about.html">Обо мне</a></li>
-      <li><a href="booking.html">Онлайн запись</a></li>
-      <li><a href="contacts.html">Контакты</a></li>
-      <li><a href="services.html">Услуги</a></li>
-    </ul>
-  </nav>
+    <?php
+    /**
+    * Template Name: manage-services
+    */
+    get_header();
+    ?>
 
   <!-- =================== УПРАВЛЕНИЕ УСЛУГАМИ =================== -->
   <main class="services-admin">
@@ -184,8 +159,18 @@
   <!-- уведомления -->
   <div id="notifications" class="notifications"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="main.js"></script>
-  <script src="services-admin.js"></script>
+  <?php wp_footer();?>
+  <?php get_footer();?>
+  
+  <script src="<?php echo get_stylesheet_directory_uri();?>/js/services-admin.js"></script>
+
+  <script>
+    // Передаем данные в JavaScript
+    window.servicesAdminData = {
+        ajaxUrl: '<?php echo admin_url('admin-ajax.php'); ?>',
+        nonce: '<?php echo wp_create_nonce('services_nonce'); ?>'
+    };
+    </script>
+
 </body>
 </html>
