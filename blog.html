@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Блог</title>
+  
+  <!-- meta и стили -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- существующий sidebar/topbar -->
+  <aside class="sidebar">
+    <button id="burger" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="name">EKATERINA<br>AVRAMENKO</div>
+  </aside>
+
+  <!-- overlay для закрытия меню -->
+  <div id="overlay"></div>
+
+  <!-- навигационное меню -->
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="booking.html">Онлайн запись</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+      <li><a href="services.html">Услуги</a></li>
+      <li><a href="blog.html">Блог</a></li>
+    </ul>
+  </nav>
+
+  <!-- =================== КОНТЕНТ СТРАНИЦЫ =================== -->
+  <main class="blog-page">
+    <div class="blog-page__container">
+      
+      <h1 class="blog-page__title">БЛОГ</h1>
+      
+      <!-- здесь будут добавляться блоки контента -->
+      <div class="blog-page__content">
+        <!-- контент будет добавлен позже -->
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- подключение скриптов -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

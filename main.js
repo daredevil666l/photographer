@@ -337,3 +337,111 @@ window.addEventListener("resize", () => {
   }
 });
 
+/* ========== УНИКАЛЬНАЯ КОНТАКТНАЯ ФОРМА ========================== */
+document.addEventListener('DOMContentLoaded', function() {
+  const uniqueContactForm = document.getElementById('uniqueContactForm');
+  
+  if (uniqueContactForm) {
+    // Обработка отправки формы
+    uniqueContactForm.addEventListener('submit', handleUniqueContactSubmit);
+    
+    // Улучшенная работа с плавающими лейблами
+    const floatingFields = uniqueContactForm.querySelectorAll('.floating-field input, .floating-field textarea');
+    
+    floatingFields.forEach(field => {
+      // Проверяем заполненность при загрузке
+      checkFieldValue(field);
+      
+      // Проверяем при потере фокуса
+      field.addEventListener('blur', () => checkFieldValue(field));
+      field.addEventListener('input', () => checkFieldValue(field));
+    });
+  }
+});
+
+function checkFieldValue(field) {
+  if (field.value.trim() !== '') {
+    field.setAttribute('data-filled', 'true');
+  } else {
+    field.removeAttribute('data-filled');
+  }
+}
+
+async function handleUniqueContactSubmit(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  const contactData = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    shoot_type: formData.get('shoot_type'),
+    message: formData.get('message')
+  };
+  
+  // Анимация кнопки при отправке
+  const submitBtn = e.target.querySelector('.submit-btn');
+  const originalText = submitBtn.querySelector('.submit-btn__text').textContent;
+  
+  submitBtn.querySelector('.submit-btn__text').textContent = 'ОТПРАВЛЯЕТСЯ...';
+  submitBtn.style.pointerEvents = 'none';
+  
+  try {
+    // ЗДЕСЬ БУДЕТ ОТПРАВКА НА СЕРВЕР
+    const response = await fetch('send_unique_contact.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(contactData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showUniqueContactSuccess();
+      e.target.reset();
+      
+      // Сбрасываем состояния полей
+      const floatingFields = e.target.querySelectorAll('.floating-field input, .floating-field textarea');
+      floatingFields.forEach(field => {
+        field.removeAttribute('data-filled');
+      });
+    } else {
+      throw new Error(result.message || 'Ошибка отправки');
+    }
+    
+  } catch (error) {
+    showUniqueContactError(error.message);
+  } finally {
+    submitBtn.querySelector('.submit-btn__text').textContent = originalText;
+    submitBtn.style.pointerEvents = '';
+  }
+}
+
+function showUniqueContactSuccess() {
+  // Создаем стильное уведомление об успехе
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #000;
+    color: #fff;
+    padding: 1rem 2rem;
+    font-family: "Geometria", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    z-index: 10000;
+    animation: slideInRight 0.3s ease;
+  `;
+  notification.textContent = 'СООБЩЕНИЕ ОТПРАВЛЕНО';
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
+}
+
+function showUniqueContactError(message) {
+  alert('Ошибка при отправке сообщения: ' + message);
+}
